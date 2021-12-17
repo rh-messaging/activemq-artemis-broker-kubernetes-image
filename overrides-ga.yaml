@@ -1,0 +1,84 @@
+#See https://docs.cekit.io/en/latest/descriptor/overrides.html
+name: &name "amq-broker-7/amq-broker-710-openshift-rhel8"
+description: "Red Hat AMQ Broker 7.10.0 OpenShift container image"
+version: &version "7.10"
+from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-rhel8:7.10.0.ER1"
+
+labels:
+  - name: "io.k8s.display-name"
+    value: "Red Hat AMQ Broker 7.10.0"
+  - name: "io.openshift.tags"
+    value: "messaging,amq,java,jboss,xpaas"
+  - name: "com.redhat.component"
+    value: "amq-broker-rhel8-openshift-container"
+  - name: "org.jboss.product"
+    value: "amq"
+  - name: "org.jboss.product.version"
+    value: "7.10.0"
+  - name: "org.jboss.product.amq.version"
+    value: "7.10.0"
+
+envs:
+  - name: "JBOSS_PRODUCT"
+    value: "AMQ"
+  - name: "JBOSS_IMAGE_NAME"
+    value: *name
+  - name: "JBOSS_IMAGE_VERSION"
+    value: *version
+  - name: "JBOSS_AMQ_VERSION"
+    value: "7.10.0"
+  - name: "PRODUCT_VERSION"
+    value: "7.10.0"
+
+artifacts:
+  - name: openshift-ping-common
+    target: openshift-ping-common-1.2.6.Final-redhat-1.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-common/1.2.6.Final-redhat-1/openshift-ping-common-1.2.6.Final-redhat-1.jar
+    md5: 94f0bd57b1990b556890d99290bdd847
+  - name: openshift-ping-dns
+    target: openshift-ping-dns-1.2.6.Final-redhat-1.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1.jar
+    md5: 59925c951d904b7734c2d10dc41a6515
+  - name: jolokia-jvm
+    target: jolokia-jvm-1.6.2.redhat-00002-agent.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.6.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.6.2.redhat-00002/jolokia-jvm-1.6.2.redhat-00002-agent.jar
+    md5: 760f2fbaf6b142192f3cee2c99bfcbf8
+  - name: netty-tcnative
+    target: netty-tcnative-2.0.42.Final-redhat-00001-linux-x86_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.42.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.42.Final-redhat-00001/netty-tcnative-2.0.42.Final-redhat-00001-linux-x86_64-fedora.jar
+    md5: 2e7f64b6c7720a896802ea97dea9cb8b
+
+modules:
+  repositories:
+    - name: cct_module
+      git:
+        url: https://github.com/artemiscloud/cct_module.git
+        ref: 0.38.0-amq
+
+packages:
+  content_sets:
+    x86_64:
+      - rhel-8-for-x86_64-baseos-rpms
+      - rhel-8-for-x86_64-appstream-rpms
+      - rhel-8-for-x86_64-supplementary-rpms
+  install:
+    - apr
+    - procps-ng
+    - openssl
+
+osbs:
+  configuration:
+    container: #See https://osbs.readthedocs.io/en/latest/users.html#image-configuration
+      compose:
+        signing_intent: release
+        pulp_repos: true
+      platforms:
+        only:
+          - x86_64
+      image_build_method: imagebuilder
+      tags:
+        - "7.10.0.ER1"
+
+  repository:
+    name: containers/amq-broker
+    branch: amq-broker-7.10-openshift-rhel-8

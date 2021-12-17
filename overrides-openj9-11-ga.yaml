@@ -1,0 +1,57 @@
+#See https://docs.cekit.io/en/latest/descriptor/overrides.html
+name: &name "amq-broker-7/amq-broker-710-openshift-openj9-11-rhel8"
+from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-openj9-11-rhel8:7.10.0.ER1"
+
+labels:
+  - name: "com.redhat.component"
+    value: "amq-broker-openshift-openj9-11-rhel8-container"
+
+envs:
+  - name: "JBOSS_IMAGE_NAME"
+    value: *name
+
+artifacts:
+  - name: netty-tcnative-ppcle_64
+    target: netty-tcnative-2.0.40.Final-redhat-00001-linux-ppcle_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent-ppcle/2.0.40.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.40.Final-redhat-00001/netty-tcnative-2.0.40.Final-redhat-00001-linux-ppcle_64-fedora.jar
+    md5: 9bf02c761ded0536b998d6a2d5bdf932
+  - name: netty-tcnative-s390_64
+    target: netty-tcnative-2.0.40.Final-redhat-00001-linux-s390_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent-s390x/2.0.40.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.40.Final-redhat-00001/netty-tcnative-2.0.40.Final-redhat-00001-linux-s390_64-fedora.jar
+    md5: 6f98e9ae0710294a96c6340c6399d7a4
+
+modules:
+  repositories:
+    - name: cct_module
+      git:
+        url: https://github.com/artemiscloud/cct_module.git
+        ref: 0.38.0-amq-1
+
+packages:
+  content_sets:
+    s390x:
+      - rhel-8-for-s390x-baseos-rpms
+      - rhel-8-for-s390x-appstream-rpms
+      - openj9-1-for-rhel-8-s390x-rpms
+    ppc64le:
+      - rhel-8-for-ppc64le-baseos-rpms
+      - rhel-8-for-ppc64le-appstream-rpms
+      - openj9-1-for-rhel-8-ppc64le-rpms
+
+osbs:
+  configuration:
+    container: #See https://osbs.readthedocs.io/en/latest/users.html#image-configuration
+      compose:
+        signing_intent: release
+        pulp_repos: true
+      platforms:
+        only:
+          - s390x
+          - ppc64le
+      image_build_method: imagebuilder
+      tags:
+        - "7.10.0.ER1"
+
+  repository:
+    name: containers/amq-broker
+    branch: amq-broker-7.10-openshift-openj9-11-rhel-8
