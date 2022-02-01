@@ -45,8 +45,8 @@ artifacts:
     md5: 760f2fbaf6b142192f3cee2c99bfcbf8
   - name: netty-tcnative
     target: netty-tcnative-2.0.42.Final-redhat-00001-linux-x86_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.42.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.42.Final-redhat-00001/netty-tcnative-2.0.42.Final-redhat-00001-linux-x86_64-fedora.jar
-    md5: 2e7f64b6c7720a896802ea97dea9cb8b
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.46.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.46.Final-redhat-00001/netty-tcnative-2.0.46.Final-redhat-00001-linux-x86_64-fedora.jar
+    md5: b0fe9a126829a11d3de4c2d6da2d708a
 
 modules:
   repositories:
