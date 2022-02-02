@@ -1,6 +1,6 @@
 #See https://docs.cekit.io/en/latest/descriptor/overrides.html
 name: &name "amq-broker-7/amq-broker-710-openshift-openj9-11-rhel8"
-from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-openj9-11-rhel8@sha256:901015e2699a1faf4258667070770f9ac5bcdb92b91339d6c4c333a588f779b9"
+from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-openj9-11-rhel8@sha256:67cc35ce3a102be9c57f8cf270e4cd547bcf35e9ce9acc91b8bbd0856f1f0359"
 
 labels:
   - name: "com.redhat.component"
