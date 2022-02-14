@@ -3,7 +3,7 @@ schema_version: 1
 name: "artemiscloud/activemq-artemis-broker-kubernetes"
 description: "ActiveMQ Artemis broker kubernetes container image"
 version: "0.2.9"
-from: "quay.io/artemiscloud/activemq-artemis-broker:0.1.7"
+from: "quay.io/artemiscloud/activemq-artemis-broker:1.0.0"
 
 labels:
   - name: "io.k8s.description"
@@ -120,6 +120,7 @@ ports:
   - value: 8888
 
 packages:
+  manager: microdnf
   install:
     - apr
     - procps-ng
