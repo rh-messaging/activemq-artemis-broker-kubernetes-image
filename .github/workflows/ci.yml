@@ -20,28 +20,21 @@ jobs:
           sudo apt-get install gcc libkrb5-dev &&
           sudo pip install docker docker-squash cekit odcs[client]
 
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '^1.14.15'
-
       - name: Checkout the repo
         uses: actions/checkout@v2
 
       - name: Build the image
         run: "cekit --verbose build docker --tag $IMAGE_NAME:dev.latest"
 
-      - name: Checkout the activemq-artemis-operator
-        run: git clone https://github.com/artemiscloud/activemq-artemis-operator.git ${{ runner.temp }}/activemq-artemis-operator
-
-      - name: Execute the test suite
-        uses: artemiscloud/activemq-artemis-operator-test-action@v1.3
-        with:
-          test-packages: 'test/smoke/basic/...'
-          docker-images: 'activemq-artemis-broker-kubernetes:dev.latest'
-          broker-image: 'activemq-artemis-broker-kubernetes:dev.latest'
-          broker-update-image: 'activemq-artemis-broker-kubernetes:dev.latest'
-          operator-deploy-path: '${{ runner.temp }}/activemq-artemis-operator/deploy'
+      - name: Check the image
+        run: >
+          export CONTAINER_ID=$(docker run --detach --env AMQ_USER=admin --env AMQ_PASSWORD=admin $IMAGE_NAME:dev.latest) &&
+          echo CONTAINER_ID=$CONTAINER_ID && sleep 3 &&
+          export CONTAINER_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER_ID) &&
+          echo CONTAINER_IP=$CONTAINER_IP &&
+          docker cp $CONTAINER_ID:/opt/amq ./ &&
+          ./amq/bin/artemis check queue --name TEST --produce 1000 --browse 1000 --consume 1000 --user admin --password admin --url tcp://$CONTAINER_IP:61616 &&
+          docker kill $CONTAINER_ID
 
       - name: Push the image
         if: ${{ github.event_name == 'push' }}
