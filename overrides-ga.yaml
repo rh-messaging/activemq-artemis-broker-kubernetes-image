@@ -47,6 +47,14 @@ artifacts:
     target: netty-tcnative-2.0.42.Final-redhat-00001-linux-x86_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.46.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.46.Final-redhat-00001/netty-tcnative-2.0.46.Final-redhat-00001-linux-x86_64-fedora.jar
     md5: b0fe9a126829a11d3de4c2d6da2d708a
+  - name: netty-tcnative-ppcle_64
+    target: netty-tcnative-2.0.40.Final-redhat-00001-linux-ppcle_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent-ppcle/2.0.40.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.40.Final-redhat-00001/netty-tcnative-2.0.40.Final-redhat-00001-linux-ppcle_64-fedora.jar
+    md5: 9bf02c761ded0536b998d6a2d5bdf932
+  - name: netty-tcnative-s390_64
+    target: netty-tcnative-2.0.40.Final-redhat-00001-linux-s390_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent-s390x/2.0.40.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.40.Final-redhat-00001/netty-tcnative-2.0.40.Final-redhat-00001-linux-s390_64-fedora.jar
+    md5: 6f98e9ae0710294a96c6340c6399d7a4
 
 modules:
   repositories:
@@ -61,6 +69,14 @@ packages:
       - rhel-8-for-x86_64-baseos-rpms
       - rhel-8-for-x86_64-appstream-rpms
       - rhel-8-for-x86_64-supplementary-rpms
+    s390x:
+      - rhel-8-for-s390x-baseos-rpms
+      - rhel-8-for-s390x-appstream-rpms
+      - rhel-8-for-s390x-supplementary-rpms
+    ppc64le:
+      - rhel-8-for-ppc64le-baseos-rpms
+      - rhel-8-for-ppc64le-appstream-rpms
+      - rhel-8-for-ppc64le-supplementary-rpms
   install:
     - apr
     - procps-ng
@@ -75,6 +91,8 @@ osbs:
       platforms:
         only:
           - x86_64
+          - s390x
+          - ppc64le
       image_build_method: imagebuilder
       tags:
         - "7.10.0.ER1"
