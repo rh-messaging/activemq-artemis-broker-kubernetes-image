@@ -6,15 +6,8 @@ execute:
   - script: install.sh
 
 artifacts:
-  - name: openshift-ping-common
-    target: openshift-ping-common-1.2.6.Final.jar
-    url: https://github.com/jboss-openshift/openshift-ping/releases/download/1.2.6.Final/openshift-ping-common-1.2.6.Final.jar
-    md5: 2cd6db57d77e7e3921e7953b8255102b
-  - name: openshift-ping-dns
-    target: openshift-ping-dns-1.2.6.Final.jar
-    url: https://github.com/jboss-openshift/openshift-ping/releases/download/1.2.6.Final/openshift-ping-dns-1.2.6.Final.jar
-    md5: 1d4114e8e8681a7d7bd80f38f35d7f44
   - name: netty-tcnative
     target: netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
     url: https://repo1.maven.org/maven2/io/netty/netty-tcnative/2.0.46.Final/netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
     md5: 9998cb3509cc1bfd5eb7ec212c2a4710
+

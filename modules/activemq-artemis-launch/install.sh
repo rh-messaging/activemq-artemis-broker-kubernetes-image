@@ -9,9 +9,7 @@ DEST=$AMQ_HOME
 mkdir -p ${DEST}
 mkdir -p ${DEST}/conf/
 
-cp -p ${SOURCES_DIR}/openshift-ping-common*.jar \
-  ${SOURCES_DIR}/openshift-ping-dns*.jar \
-  ${SOURCES_DIR}/netty-tcnative*.jar \
+cp -p ${SOURCES_DIR}/netty-tcnative*.jar \
   ${DEST}/lib
 
 cp -p $ADDED_DIR/jgroups-ping.xml \
