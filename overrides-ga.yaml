@@ -44,9 +44,9 @@ artifacts:
     url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.6.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.6.2.redhat-00002/jolokia-jvm-1.6.2.redhat-00002-agent.jar
     md5: 760f2fbaf6b142192f3cee2c99bfcbf8
   - name: netty-tcnative
-    target: netty-tcnative-2.0.46.Final-redhat-00001-linux-x86_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.46.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.46.Final-redhat-00001/netty-tcnative-2.0.46.Final-redhat-00001-linux-x86_64-fedora.jar
-    md5: b0fe9a126829a11d3de4c2d6da2d708a
+    target: netty-tcnative-2.0.50.Final-redhat-00002-linux-x86_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.50.Final_redhat_00002/1/maven/io/netty/netty-tcnative/2.0.50.Final-redhat-00002/netty-tcnative-2.0.50.Final-redhat-00002-linux-x86_64-fedora.jar
+    md5: da30231eb31dd21d30be477a198c6b8d
   - name: netty-tcnative-ppcle_64
     target: netty-tcnative-2.0.40.Final-redhat-00001-linux-ppcle_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent-ppcle/2.0.40.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.40.Final-redhat-00001/netty-tcnative-2.0.40.Final-redhat-00001-linux-ppcle_64-fedora.jar
