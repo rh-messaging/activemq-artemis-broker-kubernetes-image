@@ -1,7 +1,5 @@
 #!/bin/sh
 
-source /usr/local/dynamic-resources/dynamic_resources.sh
-
 if [ "${SCRIPT_DEBUG}" = "true" ] ; then
   set -x
   echo "Script debugging is enabled, allowing bash commands and their arguments to be printed as they are executed"
@@ -10,9 +8,6 @@ fi
 
 export BROKER_IP=`hostname -f`
 CONFIG_TEMPLATES=/config_templates
-#Set the memory options via adjust_java_options from dynamic_resources
-#see https://developers.redhat.com/blog/2017/04/04/openjdk-and-containers/
-JAVA_OPTS="$(adjust_java_options ${JAVA_OPTS})"
 
 #GC Option conflicts with the one already configured.
 echo "Removing provided -XX:+UseParallelOldGC in favour of artemis.profile provided option"
