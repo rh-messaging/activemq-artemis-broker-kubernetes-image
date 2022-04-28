@@ -133,9 +133,7 @@ modules:
         url: https://github.com/artemiscloud/cct_module.git
         ref: 0.38.0-artemiscloud-1
   install:
-    - name: dynamic-resources
     - name: os-amq-s2i
-    - name: os-java-run
     - name: openshift-passwd
     - name: os-logging
     - name: os-amq-permissions
