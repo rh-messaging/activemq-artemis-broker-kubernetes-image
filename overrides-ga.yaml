@@ -61,7 +61,7 @@ modules:
     - name: cct_module
       git:
         url: https://github.com/artemiscloud/cct_module.git
-        ref: 0.38.0-amq
+        ref: 0.38.0-amq-2
 
 packages:
   content_sets:
