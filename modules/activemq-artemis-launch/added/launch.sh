@@ -618,14 +618,14 @@ function configure() {
 
     echo "Checking yacfg file under dir: $TUNE_PATH"
 
-    if [[ -f "${TUNE_PATH}/broker.xml" ]]; then
-        echo "yacfg broker.xml exists."
-        updateAddressSettings "${TUNE_PATH}/broker.xml" "${instanceDir}/etc/broker.xml"
-    fi
-
     if [ "$AMQ_CLUSTERED" = "true" ]; then
       modifyDiscovery
       configureRedistributionDelay ${instanceDir}
+    fi
+
+    if [[ -f "${TUNE_PATH}/broker.xml" ]]; then
+        echo "yacfg broker.xml exists."
+        updateAddressSettings "${TUNE_PATH}/broker.xml" "${instanceDir}/etc/broker.xml"
     fi
     $AMQ_HOME/bin/configure_jolokia_access.sh ${instanceDir}/etc/jolokia-access.xml
     if [ "$AMQ_KEYSTORE_TRUSTSTORE_DIR" ]; then
