@@ -24,16 +24,6 @@ if [ "${PLATFORM}" = "s390x" ] ; then
 fi
 JAVA_OPTS="-Djava.net.preferIPv4Stack=true ${JAVA_OPTS}"
 
-if [ "$AMQ_ENABLE_JOLOKIA_AGENT" = "true" ]; then
-  echo "Enable jolokia jvm agent"
-  export AB_JOLOKIA_USER=$AMQ_JOLOKIA_AGENT_USER
-  export AB_JOLOKIA_PASSWORD_RANDOM=false
-  export AB_JOLOKIA_PASSWORD=$AMQ_JOLOKIA_AGENT_PASSWORD
-  export AB_JOLOKIA_OPTS="realm=activemq,caCert=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,clientPrincipal.1=cn=system:master-proxy,clientPrincipal.2=cn=hawtio-online.hawtio.svc,clientPrincipal.3=cn=fuse-console.fuse.svc"
-  JOLOKIA_OPTS="$(/opt/jolokia/jolokia-opts)"
-  JAVA_OPTS="${JAVA_OPTS} ${JOLOKIA_OPTS}"
-fi
-
 
 function sslPartial() {
   [ -n "$AMQ_KEYSTORE_TRUSTSTORE_DIR" -o -n "$AMQ_KEYSTORE" -o -n "$AMQ_TRUSTSTORE" -o -n "$AMQ_KEYSTORE_PASSWORD" -o -n "$AMQ_TRUSTSTORE_PASSWORD" ]
@@ -271,6 +261,22 @@ function configureJAVA_ARGSMemory() {
   instanceDir=$1
   echo "Removing hardcoded -Xms -Xmx from artemis.profile in favour of JAVA_OPTS in log above"
   sed -i "s/\-Xms[0-9]*[mMgG] \-Xmx[0-9]*[mMgG] \-Dhawtio/\ -Dhawtio/g" ${instanceDir}/etc/artemis.profile
+}
+
+function configureJolokiaJVMAgent() {
+  instanceDir=$1
+  if [ "$AMQ_ENABLE_JOLOKIA_AGENT" = "true" ]; then
+    echo "Enable jolokia jvm agent"
+    export AB_JOLOKIA_USER=$AMQ_JOLOKIA_AGENT_USER
+    export AB_JOLOKIA_PASSWORD_RANDOM=false
+    export AB_JOLOKIA_PASSWORD=$AMQ_JOLOKIA_AGENT_PASSWORD
+    export AB_JOLOKIA_OPTS="realm=activemq,caCert=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,clientPrincipal.1=cn=system:master-proxy,clientPrincipal.2=cn=hawtio-online.hawtio.svc,clientPrincipal.3=cn=fuse-console.fuse.svc"
+    JOLOKIA_OPTS="$(/opt/jolokia/jolokia-opts)"
+
+    echo '' >> ${instanceDir}/etc/artemis.profile
+    echo "if [ \"\$1\" = \"run\" ]; then JAVA_ARGS=\"\$JAVA_ARGS $JOLOKIA_OPTS\"; fi" >> ${instanceDir}/etc/artemis.profile
+    echo '' >> ${instanceDir}/etc/artemis.profile
+  fi
 }
 
 function injectMetricsPlugin() {
@@ -645,6 +651,7 @@ function configure() {
     appendConnectorsFromEnv ${instanceDir}
     configureLogging ${instanceDir}
     configureJAVA_ARGSMemory ${instanceDir}
+    configureJolokiaJVMAgent ${instanceDir}
 
     if [ "$AMQ_ENABLE_MANAGEMENT_RBAC" = "false" ]; then
       disableManagementRBAC ${instanceDir}
