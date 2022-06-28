@@ -543,7 +543,15 @@ function disableManagementRBAC() {
   # For hawtio-online, RBAC is checked at the hawtio nginx reverse proxy
   # and must not be checked at broker.
   # See: https://github.com/hawtio/hawtio-online#rbac
-  sed -i "s/<\/whitelist>/<entry domain=\"org.apache.activemq.artemis\"\/><\/whitelist>/" ${instanceDir}/etc/management.xml
+
+  RBAC_ALLOW_LIST=$(grep -m 1 -oP 'allowlist|whitelist' ${instanceDir}/etc/management.xml)
+
+  if [ -z ${RBAC_ALLOW_LIST} ]; then
+    echo "NO RBAC_ALLOW_LIST defined"
+    exit 1
+  fi
+
+  sed -i "s~</${RBAC_ALLOW_LIST}>~<entry domain=\"org.apache.activemq.artemis\"/></${RBAC_ALLOW_LIST}>~" ${instanceDir}/etc/management.xml
 }
 
 function configure() {
