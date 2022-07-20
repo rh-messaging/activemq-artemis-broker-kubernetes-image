@@ -24,6 +24,16 @@ if [ "${PLATFORM}" = "s390x" ] ; then
 fi
 JAVA_OPTS="-Djava.net.preferIPv4Stack=true ${JAVA_OPTS}"
 
+if [ "$AMQ_ENABLE_JOLOKIA_AGENT" = "true" ]; then
+  echo "Define jolokia jvm agent options"
+  export AB_JOLOKIA_USER=$AMQ_JOLOKIA_AGENT_USER
+  export AB_JOLOKIA_PASSWORD_RANDOM=false
+  export AB_JOLOKIA_PASSWORD=$AMQ_JOLOKIA_AGENT_PASSWORD
+  export AB_JOLOKIA_OPTS="${AMQ_JOLOKIA_AGENT_OPTS}"
+  JOLOKIA_OPTS="$(/opt/jolokia/jolokia-opts)"
+  echo "JOLOKIA_OPTS: $JOLOKIA_OPTS"
+fi
+
 
 function sslPartial() {
   [ -n "$AMQ_KEYSTORE_TRUSTSTORE_DIR" -o -n "$AMQ_KEYSTORE" -o -n "$AMQ_TRUSTSTORE" -o -n "$AMQ_KEYSTORE_PASSWORD" -o -n "$AMQ_TRUSTSTORE_PASSWORD" ]
@@ -266,13 +276,8 @@ function configureJAVA_ARGSMemory() {
 function configureJolokiaJVMAgent() {
   instanceDir=$1
   if [ "$AMQ_ENABLE_JOLOKIA_AGENT" = "true" ]; then
-    echo "Enable jolokia jvm agent"
-    export AB_JOLOKIA_USER=$AMQ_JOLOKIA_AGENT_USER
-    export AB_JOLOKIA_PASSWORD_RANDOM=false
-    export AB_JOLOKIA_PASSWORD=$AMQ_JOLOKIA_AGENT_PASSWORD
-    export AB_JOLOKIA_OPTS="realm=activemq,caCert=/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt,clientPrincipal.1=cn=system:master-proxy,clientPrincipal.2=cn=hawtio-online.hawtio.svc,clientPrincipal.3=cn=fuse-console.fuse.svc"
-    JOLOKIA_OPTS="$(/opt/jolokia/jolokia-opts)"
-
+    echo "Configure jolokia jvm agent"
+    echo "JOLOKIA_OPTS: $JOLOKIA_OPTS"
     echo '' >> ${instanceDir}/etc/artemis.profile
     echo "if [ \"\$1\" = \"run\" ]; then JAVA_ARGS=\"\$JAVA_ARGS $JOLOKIA_OPTS\"; fi" >> ${instanceDir}/etc/artemis.profile
     echo '' >> ${instanceDir}/etc/artemis.profile
