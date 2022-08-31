@@ -562,7 +562,7 @@ function disableManagementRBAC() {
     exit 1
   fi
 
-  sed -i "s~</${RBAC_ALLOW_LIST}>~<entry domain=\"org.apache.activemq.artemis\"/></${RBAC_ALLOW_LIST}>~" ${instanceDir}/etc/management.xml
+  sed -i "s~</${RBAC_ALLOW_LIST}>~<entry domain=\"*\"/></${RBAC_ALLOW_LIST}>~" ${instanceDir}/etc/management.xml
 }
 
 function configure() {
