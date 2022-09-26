@@ -1,8 +1,8 @@
 #See https://docs.cekit.io/en/latest/descriptor/overrides.html
 name: &name "amq-broker-7/amq-broker-710-openshift-rhel8"
-description: "Red Hat AMQ Broker 7.10.0 OpenShift container image"
+description: "Red Hat AMQ Broker 7.10.0 PATCH-3225 OpenShift container image"
 version: &version "7.10"
-from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-rhel8@sha256:d67b51967489999647c7b223fa622a01425b90705925d9eeb316dc55e2a6cb96"
+from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-rhel8:7.10-73"
 
 labels:
   - name: "io.k8s.display-name"
@@ -88,7 +88,7 @@ osbs:
           - ppc64le
       image_build_method: imagebuilder
       tags:
-        - "7.10.0.OPR.4.CR1"
+        - "7.10.0.OPR.4.CR1-PATCH-3225"
 
   repository:
     name: containers/amq-broker
