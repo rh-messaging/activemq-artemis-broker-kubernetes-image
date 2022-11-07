@@ -88,7 +88,7 @@ osbs:
           - ppc64le
       image_build_method: imagebuilder
       tags:
-        - "7.10.1.OPR.1.CR7"
+        - "7.10.1.OPR.2.CR1"
 
   repository:
     name: containers/amq-broker
