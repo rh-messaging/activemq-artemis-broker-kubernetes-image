@@ -35,22 +35,38 @@ artifacts:
     target: openshift-ping-common-1.2.6.Final-redhat-1.jar
     url: http://download.devel.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-common/1.2.6.Final-redhat-1/openshift-ping-common-1.2.6.Final-redhat-1.jar
     md5: 94f0bd57b1990b556890d99290bdd847
+    source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-common/1.2.6.Final-redhat-1/openshift-ping-common-1.2.6.Final-redhat-1-sources.jar
+    source-md5: 64630c5a5603329fe0e384c67a8a968e
   - name: openshift-ping-dns
     target: openshift-ping-dns-1.2.6.Final-redhat-1.jar
     url: http://download.devel.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1.jar
     md5: 59925c951d904b7734c2d10dc41a6515
+    source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1-sources.jar
+    source-md5: 9803ae8531e5386c57da88d119e6aaec
   - name: netty-tcnative
     target: netty-tcnative-2.0.52.Final-redhat-00002-linux-x86_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.52.Final_redhat_00002/1/maven/io/netty/netty-tcnative/2.0.52.Final-redhat-00002/netty-tcnative-2.0.52.Final-redhat-00002-linux-x86_64-fedora.jar
     md5: 196193693f01ada0d80a742a8aa2fa13
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.52.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.52.Final-redhat-00002/netty-tcnative-parent-2.0.52.Final-redhat-00002-project-sources.tar.gz
+    source-md5: 03c8d1b28bc21a4112fb032d52354260
   - name: netty-tcnative-ppcle_64
     target: netty-tcnative-2.0.52.Final-redhat-00001-linux-ppcle_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.52.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.52.Final-redhat-00001/netty-tcnative-2.0.52.Final-redhat-00001-linux-ppcle_64-fedora.jar
     md5: f2f470b0345ea90f12765e1293b6ccdc
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.52.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.52.Final-redhat-00002/netty-tcnative-parent-2.0.52.Final-redhat-00002-project-sources.tar.gz
+    source-md5: 03c8d1b28bc21a4112fb032d52354260
   - name: netty-tcnative-s390_64
     target: netty-tcnative-2.0.52.Final-redhat-00001-linux-s390_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.52.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.52.Final-redhat-00001/netty-tcnative-2.0.52.Final-redhat-00001-linux-s390_64-fedora.jar
     md5: abac0d74bce3a8bc5c44d59a71d2eddc
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.52.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.52.Final-redhat-00002/netty-tcnative-parent-2.0.52.Final-redhat-00002-project-sources.tar.gz
+    source-md5: 03c8d1b28bc21a4112fb032d52354260
+  - name: jolokia-jvm
+    target: jolokia-jvm-1.7.1.redhat-00001-agent.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.1.redhat_00001/1/maven/org/jolokia/jolokia-jvm/1.7.1.redhat-00001/jolokia-jvm-1.7.1.redhat-00001.jar
+    md5: d97687fe4abef717735c3c1f4faf5f9b
+    source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.1.redhat_00001/1/maven/org/jolokia/jolokia-jvm/1.7.1.redhat-00001/jolokia-jvm-1.7.1.redhat-00001-sources.jar
+    source-md5: 131a0f4cf8162e6a30d0c781b56952c0
 
 modules:
   repositories:
