@@ -53,14 +53,14 @@ artifacts:
     target: netty-tcnative-2.0.52.Final-redhat-00001-linux-ppcle_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.52.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.52.Final-redhat-00001/netty-tcnative-2.0.52.Final-redhat-00001-linux-ppcle_64-fedora.jar
     md5: f2f470b0345ea90f12765e1293b6ccdc
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.52.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.52.Final-redhat-00002/netty-tcnative-parent-2.0.52.Final-redhat-00002-project-sources.tar.gz
-    source-md5: 03c8d1b28bc21a4112fb032d52354260
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.52.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-ppcle/2.0.52.Final-redhat-00001/netty-tcnative-parent-ppcle-2.0.52.Final-redhat-00001-project-sources.tar.gz
+    source-md5: 11e4512953553d62aed2acdb7f1eccfa
   - name: netty-tcnative-s390_64
     target: netty-tcnative-2.0.52.Final-redhat-00001-linux-s390_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.52.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.52.Final-redhat-00001/netty-tcnative-2.0.52.Final-redhat-00001-linux-s390_64-fedora.jar
     md5: abac0d74bce3a8bc5c44d59a71d2eddc
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.52.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.52.Final-redhat-00002/netty-tcnative-parent-2.0.52.Final-redhat-00002-project-sources.tar.gz
-    source-md5: 03c8d1b28bc21a4112fb032d52354260
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.52.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-s390x/2.0.52.Final-redhat-00001/netty-tcnative-parent-s390x-2.0.52.Final-redhat-00001-project-sources.tar.gz
+    source-md5: 4e481950830e487b9672e43fe7a04ec4
   - name: jolokia-jvm
     target: jolokia-jvm-1.7.1.redhat-00001-agent.jar
     url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.1.redhat_00001/1/maven/org/jolokia/jolokia-jvm/1.7.1.redhat-00001/jolokia-jvm-1.7.1.redhat-00001.jar
