@@ -2,7 +2,7 @@
 name: &name "amq-broker-7/amq-broker-710-openshift-rhel8"
 description: "Red Hat AMQ Broker 7.10.2 OpenShift container image"
 version: &version "7.10"
-from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-rhel8@sha256:82310f605b33a95de1aab0192816b4dd3c4ccdef9389eb21d1d2a4bacb2474ed"
+from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-710-rhel8@sha256:7e7e9cc5280e3ce0dbcfc64c4ab7ed5921498d85f67b17e845491fbdf116f50b"
 
 labels:
   - name: "io.k8s.display-name"
