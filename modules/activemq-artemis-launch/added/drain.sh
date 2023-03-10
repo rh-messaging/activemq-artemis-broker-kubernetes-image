@@ -1,8 +1,8 @@
 #!/bin/sh
 
-export BROKER_IP=`hostname -f`
+export BROKER_HOST=`hostname -f`
 
-echo "[drain.sh] drainer container ip(from hostname) is $BROKER_IP"
+echo "[drain.sh] drainer container ip(from hostname) is $BROKER_HOST"
 
 instanceDir="${HOME}/${AMQ_NAME}"
 
@@ -19,7 +19,7 @@ function waitForJolokia() {
   while : ;
   do
     sleep 5
-    curl -s -o /dev/null -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_IP}:8161/console/jolokia
+    curl -s -o /dev/null -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia
     if [ $? -eq 0 ]; then
       break
     fi
@@ -45,14 +45,14 @@ while [ 1 ]; do
     echo "[drain.sh] Can't find ip to scale down to tried ${count} ips"
     exit 1
   fi
-  echo "[drain.sh] got ip ${ip} broker ip is ${BROKER_IP}"
+  echo "[drain.sh] got ip ${ip} broker ip is ${BROKER_HOST}"
   podName=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['name']")
   if [ $? -ne 0 ]; then
     echo "[drain.sh] Can't find pod name to scale down to tried ${count}"
     exit 1
   fi
-  echo "[drain.sh] got podName ${podName} broker ip is ${BROKER_IP}"
-  if [ "$podName" != "$BROKER_IP" ]; then
+  echo "[drain.sh] got podName ${podName} broker ip is ${BROKER_HOST}"
+  if [ "$podName" != "$BROKER_HOST" ]; then
     # found an endpoint pod as a candidate for scaledown target
     podNamespace=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['namespace']")
     if [ $? -ne 0 ]; then
@@ -89,6 +89,7 @@ do
       # remove the last dot
       case $hostName in *.) hostName=${hostName%"."};; esac
       echo "[drain.sh] found hostname: $hostName"
+      break
     fi
   fi
 done <<< ${dnsNames}
@@ -110,7 +111,7 @@ sed -i "/<\/connectors>/ s/.*/${connector}\n&/" ${instanceDir}/etc/broker.xml
 
 # Remove the acceptors
 #sed -i -ne "/<acceptors>/ {p;   " -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" ${instanceDir}/etc/broker.xml
-acceptor="<acceptor name=\"artemis\">tcp:\/\/${BROKER_IP}:61616?protocols=CORE<\/acceptor>"
+acceptor="<acceptor name=\"artemis\">tcp:\/\/${BROKER_HOST}:61616?protocols=CORE<\/acceptor>"
 sed -i -ne "/<acceptors>/ {p; i $acceptor" -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" ${instanceDir}/etc/broker.xml
 
 #start the broker and issue the scaledown command to drain the messages.
@@ -120,7 +121,7 @@ tail -n 100 -f ${AMQ_NAME}/log/artemis.log &
 
 waitForJolokia
 
-RET_CODE=`curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_IP}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector`
+RET_CODE=`curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector`
 
 HTTP_CODE=`echo $RET_CODE | python2 -c "import sys, json; print json.load(sys.stdin)['status']"`
 
