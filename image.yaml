@@ -127,6 +127,7 @@ packages:
   install:
     - apr
     - procps-ng
+    - bind-utils
 
 modules:
   repositories:

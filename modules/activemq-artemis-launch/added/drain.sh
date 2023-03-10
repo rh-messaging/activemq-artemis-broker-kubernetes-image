@@ -2,7 +2,7 @@
 
 export BROKER_IP=`hostname -f`
 
-echo "drainer container ip(from hostname) is $BROKER_IP"
+echo "[drain.sh] drainer container ip(from hostname) is $BROKER_IP"
 
 instanceDir="${HOME}/${AMQ_NAME}"
 
@@ -29,12 +29,12 @@ function waitForJolokia() {
 
 endpointsCode=$(curl -s -o /dev/null -w "%{http_code}" -G -k -H "${endpointsAuth}" ${endpointsUrl})
 if [ $endpointsCode -ne 200 ]; then
-  echo "Can't find endpoints with ips status <${endpointsCode}>"
+  echo "[drain.sh] Can't find endpoints with ips status <${endpointsCode}>"
   exit 1
 fi
 
 ENDPOINTS=$(curl -s -X GET -G -k -H "${endpointsAuth}" ${endpointsUrl}"endpoints/${ENDPOINT_NAME}")
-echo $ENDPOINTS
+echo "[drain.sh] $ENDPOINTS"
 # we will find out a broker pod's fqdn name which is <pod-name>.<$HEADLESS_SVC_NAME>.<namespace>.svc.<domain-name>
 # https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
 count=0
@@ -42,21 +42,21 @@ foundTarget="false"
 while [ 1 ]; do
   ip=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['ip']")
   if [ $? -ne 0 ]; then
-    echo "Can't find ip to scale down to tried ${count} ips"
+    echo "[drain.sh] Can't find ip to scale down to tried ${count} ips"
     exit 1
   fi
-  echo "got ip ${ip} broker ip is ${BROKER_IP}"
+  echo "[drain.sh] got ip ${ip} broker ip is ${BROKER_IP}"
   podName=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['name']")
   if [ $? -ne 0 ]; then
-    echo "Can't find pod name to scale down to tried ${count}"
+    echo "[drain.sh] Can't find pod name to scale down to tried ${count}"
     exit 1
   fi
-  echo "got podName ${podName} broker ip is ${BROKER_IP}"
+  echo "[drain.sh] got podName ${podName} broker ip is ${BROKER_IP}"
   if [ "$podName" != "$BROKER_IP" ]; then
     # found an endpoint pod as a candidate for scaledown target
     podNamespace=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['namespace']")
     if [ $? -ne 0 ]; then
-      echo "Can't find pod namespace to scale down to tried ${count}"
+      echo "[drain.sh] Can't find pod namespace to scale down to tried ${count}"
       exit 1
     fi
     foundTarget="true"
@@ -67,34 +67,45 @@ while [ 1 ]; do
 done
 
 if [ "$foundTarget" == "false" ]; then
-  echo "Can't find a target to scale down to"
+  echo "[drain.sh] Can't find a target to scale down to"
   exit 1
 fi
 
-# parse cluster domain name in /etc/resolv.conf
+# get host name of target pod
+IFSP=$IFS
+IFS=
+dnsNames=$(nslookup ${ip})
+echo "[drain.sh] $dnsNames"
+
+hostNamePrefix="${podName}.${HEADLESS_SVC_NAME}.${podNamespace}.svc."
+echo "[drain.sh] searching hostname with prefix: $hostNamePrefix"
+
 while read -r line
 do
   IFS=' ' read -ra ARRAY <<< "$line"
   if [ ${#ARRAY[@]} -gt 0 ]; then
-    if [ ${ARRAY[0]} == "search" ]; then
-      domainName=${ARRAY[-1]}
-      echo "found domain name: $domainName"
+    hostName=${ARRAY[-1]}
+    if [[ $hostName == ${hostNamePrefix}* ]]; then
+      # remove the last dot
+      case $hostName in *.) hostName=${hostName%"."};; esac
+      echo "[drain.sh] found hostname: $hostName"
     fi
   fi
-done <<< $(cat /etc/resolv.conf)
+done <<< ${dnsNames}
+IFS=$IFSP
 
-if [ -z "$domainName" ]; then
-  echo "Can't find domain name"
+if [ -z "$hostName" ]; then
+  echo "[drain.sh] Can't find target host name"
   exit 1
 fi
 
 source /opt/amq/bin/launch.sh nostart
 
-SCALE_TO_BROKER_IP="${podName}.${HEADLESS_SVC_NAME}.${podNamespace}.svc.${domainName}"
-echo "scale down target is: $SCALE_TO_BROKER_IP"
+SCALE_TO_BROKER="${hostName}"
+echo "[drain.sh] scale down target is: $SCALE_TO_BROKER"
 
 # Add connector to the pod to scale down to
-connector="<connector name=\"scaledownconnector\">tcp:\/\/${SCALE_TO_BROKER_IP}:61616<\/connector>"
+connector="<connector name=\"scaledownconnector\">tcp:\/\/${SCALE_TO_BROKER}:61616<\/connector>"
 sed -i "/<\/connectors>/ s/.*/${connector}\n&/" ${instanceDir}/etc/broker.xml
 
 # Remove the acceptors
@@ -113,12 +124,14 @@ RET_CODE=`curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_IP}:8161/consol
 
 HTTP_CODE=`echo $RET_CODE | python2 -c "import sys, json; print json.load(sys.stdin)['status']"`
 
-echo "curl return code ${HTTP_CODE}"
+echo "[drain.sh] curl return code ${HTTP_CODE}"
 
 if [ "${HTTP_CODE}" != "200" ]; then
-  echo "scaleDown is not successful, response: $RET_CODE"
+  echo "[drain.sh] scaleDown is not successful, response: $RET_CODE"
+  echo "[drain.sh] sleeping for 30 seconds to allow inspection before it restarts"
+  sleep 30
   exit 1
 fi
 
-echo "scaledown is successful"
+echo "[drain.sh] scaledown is successful"
 exit 0
