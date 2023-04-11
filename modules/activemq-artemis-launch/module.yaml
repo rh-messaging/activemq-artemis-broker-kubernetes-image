@@ -10,13 +10,3 @@ artifacts:
     target: netty-tcnative-2.0.54.Final-linux-x86_64-fedora.jar
     url: https://repo1.maven.org/maven2/io/netty/netty-tcnative/2.0.54.Final/netty-tcnative-2.0.54.Final-linux-x86_64-fedora.jar
     md5: 5a9862ecfcb19171e22a6d603c61169d
-  - name: artemis-prometheus-metrics-plugin
-    target: artemis-prometheus-metrics-plugin-2.0.0.jar
-    url: https://github.com/rh-messaging/artemis-prometheus-metrics-plugin/releases/download/v2.0.0/artemis-prometheus-metrics-plugin-2.0.0.jar
-    description: "ActiveMQ Artemis Prometheus Metrics Plugin"
-    md5: e1a33fe250d1c23afd4c60c8ff0c6609
-  - name: artemis-prometheus-metrics-plugin-servlet
-    target: artemis-prometheus-metrics-plugin-servlet-2.0.0.war
-    url: https://github.com/rh-messaging/artemis-prometheus-metrics-plugin/releases/download/v2.0.0/artemis-prometheus-metrics-plugin-servlet-2.0.0.war
-    description: "ActiveMQ Artemis Prometheus Metrics Plugin Servlet"
-    md5: 4b8c5345fc3590aaabe0b3bb1766a30c
