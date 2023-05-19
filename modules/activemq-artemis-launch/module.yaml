@@ -6,8 +6,19 @@ execute:
   - script: install.sh
 
 artifacts:
-  - name: netty-tcnative
+  - name: netty-tcnative-classes
+    target: netty-tcnative-classes-2.0.46.Final.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-classes/2.0.46.Final/netty-tcnative-classes-2.0.46.Final.jar
+    md5: b398595d12e13f97ff9295abdf0d6a76
+  - name: netty-tcnative-0
     target: netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
     url: https://repo1.maven.org/maven2/io/netty/netty-tcnative/2.0.46.Final/netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
     md5: 9998cb3509cc1bfd5eb7ec212c2a4710
-
+  - name: netty-tcnative-1
+    target: netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative/2.0.46.Final/netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
+    md5: 9998cb3509cc1bfd5eb7ec212c2a4710
+  - name: netty-tcnative-2
+    target: netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative/2.0.46.Final/netty-tcnative-2.0.46.Final-linux-x86_64-fedora.jar
+    md5: 9998cb3509cc1bfd5eb7ec212c2a4710
