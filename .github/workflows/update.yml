@@ -80,14 +80,26 @@ jobs:
           APACHE_ARTEMIS_VERSION=$(skopeo inspect docker://${BASE_IMAGE} | grep -Po '(?<=APACHE_ARTEMIS_VERSION=)[^"]*')
           wget -O netty-pom.xml "https://raw.githubusercontent.com/apache/activemq-artemis/${APACHE_ARTEMIS_VERSION}/pom.xml"
           NETTY_TCNATIVE_VERSION=$(grep -Po '(?<=tcnative.version>)[^<]+' netty-pom.xml)
+          NETTY_TCNATIVE_CLASSES_URL="https://repo1.maven.org/maven2/io/netty/netty-tcnative-classes/${NETTY_TCNATIVE_VERSION}/netty-tcnative-classes-${NETTY_TCNATIVE_VERSION}.jar"
+          NETTY_TCNATIVE_CLASSES_TARGET=$(basename ${NETTY_TCNATIVE_CLASSES_URL})
+          wget -O ${NETTY_TCNATIVE_CLASSES_TARGET} "${NETTY_TCNATIVE_CLASSES_URL}"
+          NETTY_TCNATIVE_CLASSES_MD5=($(md5sum ${NETTY_TCNATIVE_CLASSES_TARGET}))
+          sed -i "/name: netty-tcnative-classes/,/md5:/ s~target:.*~target: ${NETTY_TCNATIVE_CLASSES_TARGET}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-classes/,/md5:/ s~url:.*~url: ${NETTY_TCNATIVE_CLASSES_URL}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-classes/,/md5:/ s~md5:.*~md5: ${NETTY_TCNATIVE_CLASSES_MD5}~" modules/activemq-artemis-launch/module.yaml
           NETTY_TCNATIVE_URL="https://repo1.maven.org/maven2/io/netty/netty-tcnative/${NETTY_TCNATIVE_VERSION}/netty-tcnative-${NETTY_TCNATIVE_VERSION}-linux-x86_64-fedora.jar"
           NETTY_TCNATIVE_TARGET=$(basename ${NETTY_TCNATIVE_URL})
-          wget -O netty-tcnative-linux-x86_64-fedora.jar "${NETTY_TCNATIVE_URL}"
-          NETTY_TCNATIVE_MD5=($(md5sum netty-tcnative-linux-x86_64-fedora.jar))
-          PREV_NETTY_TCNATIVE_URL=$(sed -n '/name: netty-tcnative/,$p' modules/activemq-artemis-launch/module.yaml | grep -Pom 1 'url:.*')
-          PREV_NETTY_TCNATIVE_MD5=$(sed -n '/name: netty-tcnative/,$p' modules/activemq-artemis-launch/module.yaml | grep -Pom 1 'md5:.*')
-          PREV_NETTY_TCNATIVE_TARGET=$(sed -n '/name: netty-tcnative/,$p' modules/activemq-artemis-launch/module.yaml | grep -Pom 1 'target:.*')
-          sed -i -e "s~${PREV_NETTY_TCNATIVE_TARGET}~target: ${NETTY_TCNATIVE_TARGET}~" -e "s~${PREV_NETTY_TCNATIVE_URL}~url: ${NETTY_TCNATIVE_URL}~" -e "s~${PREV_NETTY_TCNATIVE_MD5}~md5: ${NETTY_TCNATIVE_MD5}~" modules/activemq-artemis-launch/module.yaml
+          wget -O ${NETTY_TCNATIVE_TARGET} "${NETTY_TCNATIVE_URL}"
+          NETTY_TCNATIVE_MD5=($(md5sum ${NETTY_TCNATIVE_TARGET}))
+          sed -i "/name: netty-tcnative-0/,/md5:/ s~target:.*~target: ${NETTY_TCNATIVE_TARGET}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-0/,/md5:/ s~url:.*~url: ${NETTY_TCNATIVE_URL}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-0/,/md5:/ s~md5:.*~md5: ${NETTY_TCNATIVE_MD5}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-1/,/md5:/ s~target:.*~target: ${NETTY_TCNATIVE_TARGET}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-1/,/md5:/ s~url:.*~url: ${NETTY_TCNATIVE_URL}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-1/,/md5:/ s~md5:.*~md5: ${NETTY_TCNATIVE_MD5}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-2/,/md5:/ s~target:.*~target: ${NETTY_TCNATIVE_TARGET}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-2/,/md5:/ s~url:.*~url: ${NETTY_TCNATIVE_URL}~" modules/activemq-artemis-launch/module.yaml
+          sed -i "/name: netty-tcnative-2/,/md5:/ s~md5:.*~md5: ${NETTY_TCNATIVE_MD5}~" modules/activemq-artemis-launch/module.yaml
           git commit --all --message "Upgrade netty-tcnative to ${NETTY_TCNATIVE_VERSION}" || echo "Nothing to commit"
 
       - name: Push commits
