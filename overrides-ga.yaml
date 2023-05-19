@@ -40,19 +40,25 @@ artifacts:
     md5: 59925c951d904b7734c2d10dc41a6515
     source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1-sources.jar
     source-md5: 9803ae8531e5386c57da88d119e6aaec
-  - name: netty-tcnative
+  - name: netty-tcnative-classes
+    target: netty-tcnative-classes-2.0.54.Final-redhat-00001.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.54.Final-redhat-00001/netty-tcnative-classes-2.0.54.Final-redhat-00001.jar
+    md5: 69291e9880661269e78fd8eec01f2018
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.54.Final-redhat-00001/netty-tcnative-classes-2.0.54.Final-redhat-00001-sources.jar
+    source-md5: c9b292d77c0a77c39e467bb7f95bba27
+  - name: netty-tcnative-0
     target: netty-tcnative-2.0.54.Final-redhat-00001-linux-x86_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.54.Final-redhat-00001/netty-tcnative-2.0.54.Final-redhat-00001-linux-x86_64-fedora.jar
     md5: db74859c8708408910decbc38747dc78
     source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent/2.0.54.Final-redhat-00001/netty-tcnative-parent-2.0.54.Final-redhat-00001-project-sources.tar.gz
     source-md5: 3300f9dcec099d217aaa047b2aeeec07
-  - name: netty-tcnative-ppcle_64
+  - name: netty-tcnative-1
     target: netty-tcnative-2.0.54.Final-redhat-00001-linux-ppcle_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.54.Final-redhat-00001/netty-tcnative-2.0.54.Final-redhat-00001-linux-ppcle_64-fedora.jar
     md5: 8a1c4acda8906e1bc6da0c5dbfe4687c
     source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-ppcle/2.0.54.Final-redhat-00001/netty-tcnative-parent-ppcle-2.0.54.Final-redhat-00001-project-sources.tar.gz
     source-md5: 2371d9326be2f20639d41838d2ccfc4c
-  - name: netty-tcnative-s390_64
+  - name: netty-tcnative-2
     target: netty-tcnative-2.0.54.Final-redhat-00001-linux-s390_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.54.Final-redhat-00001/netty-tcnative-2.0.54.Final-redhat-00001-linux-s390_64-fedora.jar
     md5: 2691bfac3854ed93d1a1c19bd2e532a4
