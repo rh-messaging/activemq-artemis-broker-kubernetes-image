@@ -134,5 +134,44 @@ if [ "${HTTP_CODE}" != "200" ]; then
   exit 1
 fi
 
+#restart the broker to check messages
+${instanceDir}/bin/artemis-service stop
+if [ $? -ne 0 ]; then
+  echo "[drain.sh] force stopping the broker"
+  ${instanceDir}/bin/artemis-service force-stop
+fi
+${instanceDir}/bin/artemis-service start
+
+waitForJolokia
+
+echo "[drain.sh] checking messages are all drained"
+RET_VALUE=$(curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/AddressNames)
+
+PYCMD=$(cat <<EOF
+import sys, json
+addrs = ''
+value = json.load(sys.stdin)['value']
+for addr in value:
+    addrs = addrs + ' ' + addr
+print addrs
+EOF
+)
+all_addresses=$(echo "$RET_VALUE" | python2 -c "$PYCMD")
+arr=($all_addresses)
+for address in "${arr[@]}"
+do
+  echo "[drain.sh] checking on address ${address}"
+  M_COUNT=$(curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22,address=%22${address}%22,component=addresses/MessageCount)
+  value=$(echo $M_COUNT | python2 -c "import sys, json; print json.load(sys.stdin)['value']")
+  if [[ $value > 0 ]]; then
+    echo "[drain.sh] scaledown not complete. There are $value messages on address $address"
+    ${instanceDir}/bin/artemis-service stop
+    exit 1
+  fi
+done
 echo "[drain.sh] scaledown is successful"
+${instanceDir}/bin/artemis-service stop
+if [ $? -ne 0 ]; then
+  ${instanceDir}/bin/artemis-service force-stop
+fi
 exit 0
