@@ -314,7 +314,7 @@ function checkBeforeRun() {
   else
     echo "Using default logging configuration(console only)"
     defaultLoggingConfigFile=${instanceDir}/etc/log4j2.properties
-    sed -i "s/rootLogger = INFO, console, log_file/rootLogger = INFO, console/g" $defaultLoggingConfigFile
+    sed -i "/rootLogger.appenderRef.log_file.ref = log_file/d" $defaultLoggingConfigFile
   fi
 }
 
