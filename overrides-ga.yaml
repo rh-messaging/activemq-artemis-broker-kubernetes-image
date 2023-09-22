@@ -60,10 +60,10 @@ artifacts:
     source-md5: d94b0970b97cf3f84abc04c85c0f0bfa
   - name: netty-tcnative-2
     target: netty-tcnative-2.0.54.Final-redhat-00001-linux-s390_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.54.Final-redhat-00001/netty-tcnative-2.0.54.Final-redhat-00001-linux-s390_64-fedora.jar
-    md5: 2691bfac3854ed93d1a1c19bd2e532a4
-    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.54.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-s390x/2.0.54.Final-redhat-00001/netty-tcnative-parent-s390x-2.0.54.Final-redhat-00001-project-sources.tar.gz
-    source-md5: 3aa96e296d15269a00a8283b3333f724
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.54.Final_redhat_00001/2/maven/io/netty/netty-tcnative/2.0.54.Final-redhat-00001/netty-tcnative-2.0.54.Final-redhat-00001-linux-s390_64-fedora.jar
+    md5: 55cd0c6589d1ce9cb08416c5b0886bd9
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.54.Final_redhat_00001/2/maven/io/netty/netty-tcnative-parent-s390x/2.0.54.Final-redhat-00001/netty-tcnative-parent-s390x-2.0.54.Final-redhat-00001-project-sources.tar.gz
+    source-md5: 7505b112d1191571cf615faede92ad0c
   - name: jolokia-jvm
     target: jolokia-jvm-1.7.1.redhat-00001-agent.jar
     url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.1.redhat_00001/1/maven/org/jolokia/jolokia-jvm/1.7.1.redhat-00001/jolokia-jvm-1.7.1.redhat-00001.jar
