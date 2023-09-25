@@ -285,6 +285,14 @@ function configureJolokiaJVMAgent() {
   fi
 }
 
+function configureLogging() {
+  instanceDir=$1
+  echo "Configure logging"
+  echo '' >> ${instanceDir}/etc/artemis.profile
+  echo 'JAVA_ARGS=" $JAVA_ARGS -Dlog4j2.configurationFile=$ARTEMIS_HOME/conf/log4j2.properties "' >> ${instanceDir}/etc/artemis.profile
+  echo '' >> ${instanceDir}/etc/artemis.profile
+}
+
 function injectMetricsPlugin() {
   instanceDir=$1
   echo "Adding artemis metrics plugin"
@@ -307,14 +315,6 @@ function checkBeforeRun() {
       echo "Need to inject Prometheus plugin"
       injectMetricsPlugin ${instanceDir}
     fi
-  fi
-
-  if [[ "${JAVA_ARGS_APPEND}" == *"-Dlog4j2.configurationFile"* ]]; then
-    echo "There is a custom logger configuration defined in JAVA_ARGS_APPEND: ${JAVA_ARGS_APPEND}"
-  else
-    echo "Using default logging configuration(console only)"
-    defaultLoggingConfigFile=${instanceDir}/etc/log4j2.properties
-    sed -i "/rootLogger.appenderRef.log_file.ref = log_file/d" $defaultLoggingConfigFile
   fi
 }
 
@@ -669,6 +669,7 @@ function configure() {
     appendConnectorsFromEnv ${instanceDir}
     configureJAVA_ARGSMemory ${instanceDir}
     configureJolokiaJVMAgent ${instanceDir}
+    configureLogging ${instanceDir}
 
     if [ "$AMQ_ENABLE_MANAGEMENT_RBAC" = "false" ]; then
       disableManagementRBAC ${instanceDir}

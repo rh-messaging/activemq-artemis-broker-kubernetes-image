@@ -40,6 +40,9 @@ cp -p ${SOURCES_DIR}/netty-tcnative*.jar \
 cp -p $ADDED_DIR/jgroups-ping.xml \
   ${DEST}/conf/
 
+cp -p $ADDED_DIR/log4j2.properties \
+  ${DEST}/conf/
+
 cp $ADDED_DIR/launch.sh \
   ${ADDED_DIR}/readinessProbe.sh \
   ${ADDED_DIR}/drain.sh \
