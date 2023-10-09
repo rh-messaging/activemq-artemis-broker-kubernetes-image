@@ -28,8 +28,9 @@ for tcp_file_path in ["/proc/net/tcp", "/proc/net/tcp6"]:
   try:
     tcp_file = open(tcp_file_path, "r")
     lines = tcp_file.readlines()
-    header = lines.pop(0)
-    tcp_lines.extend(lines)
+    if len(lines) > 0:
+      header = lines.pop(0)
+      tcp_lines.extend(lines)
     tcp_file.close()
   except IOError:
     print "Could not open {}".format(tcp_file_path)
