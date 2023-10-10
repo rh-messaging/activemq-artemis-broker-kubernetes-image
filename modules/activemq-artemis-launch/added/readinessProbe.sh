@@ -23,13 +23,17 @@ import socket
 import sys
 
 # calculate the open ports
-try:
-  tcp_file = open("/proc/net/tcp", "r")
-except IOError:
-  tcp_file = open("/proc/net/tcp6", "r")
-tcp_lines = tcp_file.readlines()
-header = tcp_lines.pop(0)
-tcp_file.close()
+tcp_lines = []
+for tcp_file_path in ["/proc/net/tcp", "/proc/net/tcp6"]:
+  try:
+    tcp_file = open(tcp_file_path, "r")
+    lines = tcp_file.readlines()
+    if len(lines) > 0:
+      header = lines.pop(0)
+      tcp_lines.extend(lines)
+    tcp_file.close()
+  except IOError:
+    print "Could not open {}".format(tcp_file_path)
 
 listening_ports = []
 for tcp_line in tcp_lines:
@@ -51,7 +55,7 @@ result=0
 
 for acceptor in acceptors:
   name = acceptor.get("name")
-  value = acceptor.text
+  value = acceptor.text.strip()
   print "{} value {}".format(name, value)
   spliturl = urlsplit(value)
   port = spliturl.port
@@ -60,7 +64,7 @@ for acceptor in acceptors:
 
   if port == None:
     print "    {} does not define a port, cannot check acceptor".format(name)
-    continue
+    result=1
 
   try:
     listening_ports.index(port)
