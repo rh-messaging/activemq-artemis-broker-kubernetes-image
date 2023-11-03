@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-export BROKER_HOST=`hostname -f`
+export BROKER_HOST="$(hostname -f)"
 
 echo "[drain.sh] drainer container ip(from hostname) is $BROKER_HOST"
 
@@ -19,7 +19,7 @@ function waitForJolokia() {
   while : ;
   do
     sleep 5
-    curl -s -o /dev/null -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia
+    curl -s -o /dev/null -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia"
     if [ $? -eq 0 ]; then
       break
     fi
@@ -27,26 +27,26 @@ function waitForJolokia() {
 }
 
 
-endpointsCode=$(curl -s -o /dev/null -w "%{http_code}" -G -k -H "${endpointsAuth}" ${endpointsUrl})
-if [ $endpointsCode -ne 200 ]; then
+endpointsCode=$(curl -s -o /dev/null -w "%{http_code}" -G -k -H "${endpointsAuth}" "${endpointsUrl}")
+if [ "$endpointsCode" -ne 200 ]; then
   echo "[drain.sh] Can't find endpoints with ips status <${endpointsCode}>"
   exit 1
 fi
 
-ENDPOINTS=$(curl -s -X GET -G -k -H "${endpointsAuth}" ${endpointsUrl}"endpoints/${ENDPOINT_NAME}")
+ENDPOINTS=$(curl -s -X GET -G -k -H "${endpointsAuth}" "${endpointsUrl}endpoints/${ENDPOINT_NAME}")
 echo "[drain.sh] $ENDPOINTS"
 # we will find out a broker pod's fqdn name which is <pod-name>.<$HEADLESS_SVC_NAME>.<namespace>.svc.<domain-name>
 # https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
 count=0
 foundTarget="false"
-while [ 1 ]; do
-  ip=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['ip']")
+while true; do
+  ip=$(echo "$ENDPOINTS" | python3 -c "import sys, json; print(json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['ip'])")
   if [ $? -ne 0 ]; then
     echo "[drain.sh] Can't find ip to scale down to tried ${count} ips"
     exit 1
   fi
   echo "[drain.sh] got ip ${ip} broker ip is ${BROKER_HOST}"
-  podName=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['name']")
+  podName=$(echo "$ENDPOINTS" | python3 -c "import sys, json; print(json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['name'])")
   if [ $? -ne 0 ]; then
     echo "[drain.sh] Can't find pod name to scale down to tried ${count}"
     exit 1
@@ -54,7 +54,7 @@ while [ 1 ]; do
   echo "[drain.sh] got podName ${podName} broker ip is ${BROKER_HOST}"
   if [ "$podName" != "$BROKER_HOST" ]; then
     # found an endpoint pod as a candidate for scaledown target
-    podNamespace=$(echo $ENDPOINTS | python2 -c "import sys, json; print json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['namespace']")
+    podNamespace=$(echo "$ENDPOINTS" | python3 -c "import sys, json; print(json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['namespace'])")
     if [ $? -ne 0 ]; then
       echo "[drain.sh] Can't find pod namespace to scale down to tried ${count}"
       exit 1
@@ -74,7 +74,7 @@ fi
 # get host name of target pod
 IFSP=$IFS
 IFS=
-dnsNames=$(nslookup ${ip})
+dnsNames=$(nslookup "${ip}")
 echo "[drain.sh] $dnsNames"
 
 hostNamePrefix="${podName}.${HEADLESS_SVC_NAME}.${podNamespace}.svc."
@@ -92,7 +92,7 @@ do
       break
     fi
   fi
-done <<< ${dnsNames}
+done <<< "${dnsNames}"
 IFS=$IFSP
 
 if [ -z "$hostName" ]; then
@@ -100,6 +100,7 @@ if [ -z "$hostName" ]; then
   exit 1
 fi
 
+# shellcheck source=/dev/null
 source /opt/amq/bin/launch.sh nostart
 
 SCALE_TO_BROKER="${hostName}"
@@ -107,23 +108,23 @@ echo "[drain.sh] scale down target is: $SCALE_TO_BROKER"
 
 # Add connector to the pod to scale down to
 connector="<connector name=\"scaledownconnector\">tcp:\/\/${SCALE_TO_BROKER}:61616<\/connector>"
-sed -i "/<\/connectors>/ s/.*/${connector}\n&/" ${instanceDir}/etc/broker.xml
+sed -i "/<\/connectors>/ s/.*/${connector}\n&/" "${instanceDir}/etc/broker.xml"
 
 # Remove the acceptors
 #sed -i -ne "/<acceptors>/ {p;   " -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" ${instanceDir}/etc/broker.xml
 acceptor="<acceptor name=\"artemis\">tcp:\/\/${BROKER_HOST}:61616?protocols=CORE<\/acceptor>"
-sed -i -ne "/<acceptors>/ {p; i $acceptor" -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" ${instanceDir}/etc/broker.xml
+sed -i -ne "/<acceptors>/ {p; i $acceptor" -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" "${instanceDir}/etc/broker.xml"
 
 #start the broker and issue the scaledown command to drain the messages.
-${instanceDir}/bin/artemis-service start
+"${instanceDir}/bin/artemis-service" start
 
-tail -n 100 -f ${AMQ_NAME}/log/artemis.log &
+tail -n 100 -f "${AMQ_NAME}/log/artemis.log" &
 
 waitForJolokia
 
-RET_CODE=`curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector`
+RET_CODE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector")
 
-HTTP_CODE=`echo $RET_CODE | python2 -c "import sys, json; print json.load(sys.stdin)['status']"`
+HTTP_CODE=$(echo "$RET_CODE" | python3 -c "import sys, json; print(json.load(sys.stdin)['status'])")
 
 echo "[drain.sh] curl return code ${HTTP_CODE}"
 
@@ -135,17 +136,17 @@ if [ "${HTTP_CODE}" != "200" ]; then
 fi
 
 #restart the broker to check messages
-${instanceDir}/bin/artemis-service stop
+"${instanceDir}/bin/artemis-service" stop
 if [ $? -ne 0 ]; then
   echo "[drain.sh] force stopping the broker"
-  ${instanceDir}/bin/artemis-service force-stop
+  "${instanceDir}/bin/artemis-service" force-stop
 fi
-${instanceDir}/bin/artemis-service start
+"${instanceDir}/bin/artemis-service" start
 
 waitForJolokia
 
 echo "[drain.sh] checking messages are all drained"
-RET_VALUE=$(curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/AddressNames)
+RET_VALUE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/AddressNames")
 
 PYCMD=$(cat <<EOF
 import sys, json
@@ -153,25 +154,25 @@ addrs = ''
 value = json.load(sys.stdin)['value']
 for addr in value:
     addrs = addrs + ' ' + addr
-print addrs
+print(addrs)
 EOF
 )
-all_addresses=$(echo "$RET_VALUE" | python2 -c "$PYCMD")
+all_addresses=$(echo "$RET_VALUE" | python3 -c "$PYCMD")
 arr=($all_addresses)
 for address in "${arr[@]}"
 do
   echo "[drain.sh] checking on address ${address}"
-  M_COUNT=$(curl -G -k http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22,address=%22${address}%22,component=addresses/MessageCount)
-  value=$(echo $M_COUNT | python2 -c "import sys, json; print json.load(sys.stdin)['value']")
-  if [[ $value > 0 ]]; then
+  M_COUNT=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22,address=%22${address}%22,component=addresses/MessageCount")
+  value=$(echo "$M_COUNT" | python3 -c "import sys, json; print(json.load(sys.stdin)['value'])")
+  if [[ $value -gt 0 ]]; then
     echo "[drain.sh] scaledown not complete. There are $value messages on address $address"
-    ${instanceDir}/bin/artemis-service stop
+    "${instanceDir}/bin/artemis-service" stop
     exit 1
   fi
 done
 echo "[drain.sh] scaledown is successful"
-${instanceDir}/bin/artemis-service stop
+"${instanceDir}/bin/artemis-service" stop
 if [ $? -ne 0 ]; then
-  ${instanceDir}/bin/artemis-service force-stop
+  "${instanceDir}/bin/artemis-service" force-stop
 fi
 exit 0

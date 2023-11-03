@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [ true = "${DEBUG}" ] ; then
   # short circuit readiness check in dev mode
@@ -16,9 +16,9 @@ COUNT=30
 SLEEP=1
 DEBUG_SCRIPT=true
 
-EVALUATE_SCRIPT=`cat <<EOF
+EVALUATE_SCRIPT=$(cat <<EOF
 import xml.etree.ElementTree
-from urlparse import urlsplit
+from urllib.parse import urlsplit
 import socket
 import sys
 
@@ -33,7 +33,7 @@ for tcp_file_path in ["/proc/net/tcp", "/proc/net/tcp6"]:
       tcp_lines.extend(lines)
     tcp_file.close()
   except IOError:
-    print "Could not open {}".format(tcp_file_path)
+    print("Could not open {}".format(tcp_file_path))
 
 listening_ports = []
 for tcp_line in tcp_lines:
@@ -56,24 +56,25 @@ result=0
 for acceptor in acceptors:
   name = acceptor.get("name")
   value = acceptor.text.strip()
-  print "{} value {}".format(name, value)
+  print("{} value {}".format(name, value))
   spliturl = urlsplit(value)
   port = spliturl.port
 
-  print "{} port {}".format(name, port)
+  print("{} port {}".format(name, port))
 
   if port == None:
-    print "    {} does not define a port, cannot check acceptor".format(name)
+    print("    {} does not define a port, cannot check acceptor".format(name))
     result=1
 
   try:
     listening_ports.index(port)
-    print "    Transport is listening on port {}".format(port)
-  except ValueError, e:
-    print "    Nothing listening on port {}, transport not yet running".format(port)
+    print("    Transport is listening on port {}".format(port))
+  except ValueError as e:
+    print("    Nothing listening on port {}, transport not yet running".format(port))
     result=1
 sys.exit(result)
-EOF`
+EOF
+)
 
 if [ $# -gt 0 ] ; then
     COUNT=$1
@@ -96,7 +97,7 @@ while : ; do
     PROBE_MESSAGE="No configuration file located: ${CONFIG_FILE}"
 
     if [ -f "${CONFIG_FILE}" ] ; then
-        python2 -c "$EVALUATE_SCRIPT" >"${OUTPUT}" 2>"${ERROR}"
+        python3 -c "$EVALUATE_SCRIPT" >"${OUTPUT}" 2>"${ERROR}"
 
         CONNECT_RESULT=$?
         if [ true = "${DEBUG_SCRIPT}" ] ; then
@@ -118,9 +119,9 @@ while : ; do
         exit 0;
     fi
 
-    COUNT=$(expr "$COUNT" - 1)
+    COUNT=$((COUNT - 1))
     if [ "$COUNT" -eq 0 ] ; then
-        echo ${PROBE_MESSAGE}
+        echo "${PROBE_MESSAGE}"
         exit 1;
     fi
     sleep "${SLEEP}"
