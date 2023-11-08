@@ -2,8 +2,8 @@ schema_version: 1
 
 name: "artemiscloud/activemq-artemis-broker-kubernetes"
 description: "ActiveMQ Artemis broker kubernetes container image"
-version: "1.0.22"
-from: "quay.io/artemiscloud/activemq-artemis-broker@sha256:474cd80326f4256dff1a317915beb0297b916028382a304df1c57fc297aab464"
+version: "1.0.23"
+from: "quay.io/artemiscloud/activemq-artemis-broker@sha256:9f635e0d86f54afe59fab377398e8703b8fe9ef1a231a03ce687052e051df432"
 
 labels:
   - name: "io.k8s.description"
@@ -128,6 +128,7 @@ packages:
     - apr
     - procps-ng
     - bind-utils
+    - jq
 
 modules:
   repositories:
