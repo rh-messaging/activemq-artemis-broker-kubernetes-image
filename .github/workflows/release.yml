@@ -22,6 +22,7 @@ jobs:
     steps:
       - name: Install prerequisites
         run: >
+          sudo apt-get update &&
           sudo apt-get install gcc libkrb5-dev pass &&
           sudo pip install docker==5.0.3 docker-squash cekit odcs[client] packaging==21.3
       - name: Checkout the repo
