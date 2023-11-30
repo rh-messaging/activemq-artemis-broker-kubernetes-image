@@ -65,17 +65,17 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.54.Final_redhat_00001/2/maven/io/netty/netty-tcnative-parent-s390x/2.0.54.Final-redhat-00001/netty-tcnative-parent-s390x-2.0.54.Final-redhat-00001-project-sources.tar.gz
     source-md5: 7505b112d1191571cf615faede92ad0c
   - name: jolokia-jvm
-    target: jolokia-jvm-1.7.1.redhat-00001-agent.jar
-    url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.1.redhat_00001/1/maven/org/jolokia/jolokia-jvm/1.7.1.redhat-00001/jolokia-jvm-1.7.1.redhat-00001.jar
-    md5: d97687fe4abef717735c3c1f4faf5f9b
-    source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.1.redhat_00001/1/maven/org/jolokia/jolokia-jvm/1.7.1.redhat-00001/jolokia-jvm-1.7.1.redhat-00001-sources.jar
-    source-md5: 131a0f4cf8162e6a30d0c781b56952c0
+    target: jolokia-jvm-1.7.2.redhat-00002-agent.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.7.2.redhat-00002/jolokia-jvm-1.7.2.redhat-00002.jar
+    md5: 78ade0028090069800b4f1b0fa6abb20
+    source-url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.7.2.redhat-00002/jolokia-jvm-1.7.2.redhat-00002-sources.jar
+    source-md5: c65460f570a95e2cfaf556097214427e
 modules:
   repositories:
     - name: cct_module
       git:
         url: https://github.com/artemiscloud/cct_module.git
-        ref: 0.38.0-amq-2
+        ref: 0.38.0-amq-3
 packages:
   content_sets:
     x86_64:

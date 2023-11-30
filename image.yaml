@@ -136,7 +136,7 @@ modules:
     - name: cct_module
       git:
         url: https://github.com/artemiscloud/cct_module.git
-        ref: 0.38.0-artemiscloud-2
+        ref: 0.38.0-artemiscloud-3
   install:
     - name: os-amq-s2i
     - name: openshift-passwd
