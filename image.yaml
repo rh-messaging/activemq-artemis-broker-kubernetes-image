@@ -129,6 +129,7 @@ packages:
     - procps-ng
     - bind-utils
     - jq
+    - python38
 
 modules:
   repositories:
