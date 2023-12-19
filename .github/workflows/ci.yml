@@ -38,7 +38,7 @@ jobs:
           tar -C $HOME/.local/bin -xvf source-to-image.tar.gz
 
       - name: Checkout the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update base image
         if: ${{ inputs.snapshot }}
@@ -47,7 +47,7 @@ jobs:
           sed -i "s~from.*~from: \"${BASE_IMAGE}\"~g" image.yaml
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v3
 
       - name: Build the image
         run: |
@@ -80,7 +80,7 @@ jobs:
 
       - name: Trigger children
         if: ${{ inputs.trigger_children }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.BOT_TOKEN }}
           script: |

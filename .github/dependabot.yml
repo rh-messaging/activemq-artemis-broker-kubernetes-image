@@ -11,4 +11,6 @@ updates:
       # weekly runs on mondays
       # monthly runs on 1st day of the month
       interval: "weekly"
-
+    commit-message:
+      # Prefix all commit messages with "[NO-ISSUE] "
+      prefix: "[NO-ISSUE]"
