@@ -47,11 +47,11 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.65.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.65.Final-redhat-00001/netty-tcnative-classes-2.0.65.Final-redhat-00001-sources.jar
     source-md5: 92ae37c5c3e99428ab6addef822adfe2
   - name: netty-tcnative-0
-    target: netty-tcnative-2.0.63.Final-redhat-00001-linux-x86_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.63.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.63.Final-redhat-00001/netty-tcnative-2.0.63.Final-redhat-00001-linux-x86_64-fedora.jar
-    md5: aa2f80d9b73a0d7c2bc9c15b45601c8d
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.63.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent/2.0.63.Final-redhat-00001/netty-tcnative-parent-2.0.63.Final-redhat-00001-project-sources.tar.gz
-    source-md5: 9a067b5e534f85a1296fd24d25929249
+    target: netty-tcnative-2.0.65.Final-redhat-00001-linux-x86_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.65.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.65.Final-redhat-00001/netty-tcnative-2.0.65.Final-redhat-00001-linux-x86_64-fedora.jar
+    md5: 87914aa50f382bd4ab178c895ec02304
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.65.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent/2.0.65.Final-redhat-00001/netty-tcnative-parent-2.0.65.Final-redhat-00001-project-sources.tar.gz
+    source-md5: e176e1720dc41a888da5adde438e71a5
   - name: netty-tcnative-1
     target: netty-tcnative-2.0.63.Final-redhat-00001-linux-ppcle_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.63.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.63.Final-redhat-00001/netty-tcnative-2.0.63.Final-redhat-00001-linux-ppcle_64-fedora.jar
