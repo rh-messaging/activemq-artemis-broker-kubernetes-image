@@ -128,7 +128,6 @@ packages:
     - apr
     - procps-ng
     - bind-utils
-    - jq
 
 modules:
   repositories:
