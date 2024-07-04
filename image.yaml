@@ -147,6 +147,13 @@ modules:
     - name: activemq.artemis.s2i
     - name: amq.custom.config
 
+artifacts:
+    - name: "jolokia-javaagent-jar"
+      url: https://repo.maven.apache.org/maven2/org/jolokia/jolokia-agent-jvm/2.0.3/jolokia-agent-jvm-2.0.3-javaagent.jar
+      md5: "afaf573d1ca5457771375cb045ebe6bd"
+      dest: /opt/jolokia
+      target: "javaagent.jar"
+
 run:
   user: 185
   cmd:
