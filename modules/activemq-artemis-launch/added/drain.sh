@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 
-export BROKER_HOST="$(hostname -f)"
+if [ -z "${DRAINER_HOST}" ]; then
+  echo "[drain.sh] DRAINER_HOST is not set"
+  sleep 30
+  exit 1
+fi
 
-echo "[drain.sh] drainer container ip(from hostname) is $BROKER_HOST"
+# use pod IP rather than `hostname -f` which will return pod's name
+# that is not resolvable across the cluster
+export BROKER_HOST=${DRAINER_HOST}
+
+echo "[drain.sh] drainer container ip is $BROKER_HOST"
 
 instanceDir="${HOME}/${AMQ_NAME}"
 
@@ -109,6 +117,9 @@ echo "[drain.sh] scale down target is: $SCALE_TO_BROKER"
 # Add connector to the pod to scale down to
 connector="<connector name=\"scaledownconnector\">tcp:\/\/${SCALE_TO_BROKER}:61616<\/connector>"
 sed -i "/<\/connectors>/ s/.*/${connector}\n&/" "${instanceDir}/etc/broker.xml"
+
+connector="<connector name=\"artemis\">tcp:\/\/${BROKER_HOST}:61616<\/connector>"
+sed -i "s/<connector name=\"artemis\">.*<\/connector>/${connector}/" "${instanceDir}/etc/broker.xml"
 
 # Remove the acceptors
 #sed -i -ne "/<acceptors>/ {p;   " -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" ${instanceDir}/etc/broker.xml
