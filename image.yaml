@@ -149,8 +149,8 @@ modules:
 
 artifacts:
     - name: "jolokia-javaagent-jar"
-      url: https://repo.maven.apache.org/maven2/org/jolokia/jolokia-agent-jvm/2.0.3/jolokia-agent-jvm-2.0.3-javaagent.jar
-      md5: "afaf573d1ca5457771375cb045ebe6bd"
+      url: https://repo.maven.apache.org/maven2/org/jolokia/jolokia-agent-jvm/2.1.1/jolokia-agent-jvm-2.1.1-javaagent.jar
+      md5: "7d6c64ad5c6c5bcda6ce5f4be395fbb0"
       dest: /opt/jolokia
       target: "javaagent.jar"
 
