@@ -41,11 +41,11 @@ artifacts:
     source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1-sources.jar
     source-md5: 9803ae8531e5386c57da88d119e6aaec
   - name: netty-tcnative-classes
-    target: netty-tcnative-classes-2.0.61.Final-redhat-00004.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.61.Final_redhat_00004/1/maven/io/netty/netty-tcnative-classes/2.0.61.Final-redhat-00004/netty-tcnative-classes-2.0.61.Final-redhat-00004.jar
-    md5: ed4bceeda66206175b83ff73e441ef45
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.61.Final_redhat_00004/1/maven/io/netty/netty-tcnative-classes/2.0.61.Final-redhat-00004/netty-tcnative-classes-2.0.61.Final-redhat-00004-sources.jar
-    source-md5: 1787ba4adda67a7e5e47729ba4e7e527
+    target: netty-tcnative-classes-2.0.61.Final-redhat-00006.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.61.Final_redhat_00006/1/maven/io/netty/netty-tcnative-classes/2.0.61.Final-redhat-00006/netty-tcnative-classes-2.0.61.Final-redhat-00006.jar
+    md5: 865f7e9db80007cfc379381b9a879420
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.61.Final_redhat_00006/1/maven/io/netty/netty-tcnative-classes/2.0.61.Final-redhat-00006/netty-tcnative-classes-2.0.61.Final-redhat-00006-sources.jar
+    source-md5: eb96e8bfb0887df9cc8f0838ba762cb4
   - name: netty-tcnative-0
     target: netty-tcnative-2.0.61.Final-redhat-00004-linux-x86_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.61.Final_redhat_00004/1/maven/io/netty/netty-tcnative/2.0.61.Final-redhat-00004/netty-tcnative-2.0.61.Final-redhat-00004-linux-x86_64-fedora.jar
