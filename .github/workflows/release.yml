@@ -21,7 +21,7 @@ jobs:
         run: >
           sudo apt-get update &&
           sudo apt-get install gcc libkrb5-dev pass &&
-          sudo pip install docker==5.0.3 docker-squash cekit odcs[client] packaging==21.3
+          sudo pip install docker==5.0.3 docker-squash cekit odcs[client]
       - name: Checkout the repo
         uses: actions/checkout@v4
         with:
