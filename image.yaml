@@ -1,9 +1,9 @@
 schema_version: 1
 
-name: "artemiscloud/activemq-artemis-broker-kubernetes"
+name: "arkmq-org/activemq-artemis-broker-kubernetes"
 description: "ActiveMQ Artemis broker kubernetes container image"
-version: "1.0.32"
-from: "quay.io/artemiscloud/activemq-artemis-broker@sha256:47b084745330a9e322961fb31c3361a8d27f89a4dded8dba841880e5543e05ff"
+version: "1.0.34"
+from: "quay.io/arkmq-org/activemq-artemis-broker@sha256:f22d0bf16d7dbb7b928a048f27e4e4f537ac9af00a5fd31cf4b73a889cc0bd2a"
 
 labels:
   - name: "io.k8s.description"
@@ -128,6 +128,8 @@ packages:
     - apr
     - procps-ng
     - bind-utils
+    - jq
+    - xmlstarlet
 
 modules:
   repositories:
@@ -149,8 +151,8 @@ modules:
 
 artifacts:
     - name: "jolokia-javaagent-jar"
-      url: https://repo.maven.apache.org/maven2/org/jolokia/jolokia-agent-jvm/2.1.1/jolokia-agent-jvm-2.1.1-javaagent.jar
-      md5: "7d6c64ad5c6c5bcda6ce5f4be395fbb0"
+      url: https://repo.maven.apache.org/maven2/org/jolokia/jolokia-agent-jvm/2.1.2/jolokia-agent-jvm-2.1.2-javaagent.jar
+      md5: "3af1d87a2bc49f243a5c5c486b2a676e"
       dest: /opt/jolokia
       target: "javaagent.jar"
 

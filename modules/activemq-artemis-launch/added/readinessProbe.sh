@@ -16,63 +16,34 @@ COUNT=30
 SLEEP=1
 DEBUG_SCRIPT=true
 
-EVALUATE_SCRIPT=$(cat <<EOF
-import xml.etree.ElementTree
-from urllib.parse import urlsplit
-import socket
-import sys
+EVALUATE_SCRIPT=$(cat <<'EOF'
+    RESULT=0
+    TCP_CON="$(jq --raw-input --slurp 'split("\n") | .[1:-1] | .[] | capture("^ +(?<en>[0-9]+): +(?<la>[0-9A-F]+):(?<lp>[0-9A-F]+) +(?<ra>[0-9A-F]+):(?<rp>[0-9A-F]+) +(?<cs>[0-9A-F]+)")' /proc/net/tcp)"
+    TCP_CON="${TCP_CON}$(jq --raw-input --slurp 'split("\n") | .[1:-1] | .[] | capture("^ +(?<en>[0-9]+): +(?<la>[0-9A-F]+):(?<lp>[0-9A-F]+) +(?<ra>[0-9A-F]+):(?<rp>[0-9A-F]+) +(?<cs>[0-9A-F]+)")' /proc/net/tcp6)"
 
-# calculate the open ports
-tcp_lines = []
-for tcp_file_path in ["/proc/net/tcp", "/proc/net/tcp6"]:
-  try:
-    tcp_file = open(tcp_file_path, "r")
-    lines = tcp_file.readlines()
-    if len(lines) > 0:
-      header = lines.pop(0)
-      tcp_lines.extend(lines)
-    tcp_file.close()
-  except IOError:
-    print("Could not open {}".format(tcp_file_path))
+    while IFS= read -r ACCEPTOR_XML; do
+        ACCEPTOR_NAME="$(echo "${ACCEPTOR_XML}" | xmlstarlet sel -t -m //_:acceptor/@name -v .)"
+        ACCEPTOR_URL="$(echo "${ACCEPTOR_XML}" | xmlstarlet sel -t -m //_:acceptor -v .)"
+        echo "${ACCEPTOR_NAME} value ${ACCEPTOR_URL}"
 
-listening_ports = []
-for tcp_line in tcp_lines:
-  stripped = tcp_line.strip()
-  contents = stripped.split()
-  # Is the status listening?
-  if contents[3] == '0A':
-    netaddr = contents[1].split(":")
-    port = int(netaddr[1], 16)
-    listening_ports.append(port)
+        ACCEPTOR_PORT="$(jq --arg url "${ACCEPTOR_URL}" -n -r '$url | capture("^(?<scheme>[^:]+)://((?<user>[^@]+)@)*(?<host>[^:]+):(?<port>[0-9]+)[?]*").port')"
 
-#parse the config file to retrieve the transport connectors
-xmldoc = xml.etree.ElementTree.parse("${CONFIG_FILE}")
+        if [ -n "${ACCEPTOR_PORT}" ]; then
+            LISTENING_TCP_CON="$(echo ${TCP_CON} | jq --arg port "$(printf "%04X" ${ACCEPTOR_PORT})" 'select(.cs == "0A" and .lp == $port)')"
 
-ns = {"config" : "urn:activemq:core"}
-acceptors = xmldoc.findall("config:core/config:acceptors/config:acceptor", ns)
+            if [ -n "${LISTENING_TCP_CON}" ]; then
+                echo "    Transport is listening on port ${ACCEPTOR_PORT}"
+            else
+                echo "    Nothing listening on port ${ACCEPTOR_PORT}, transport not yet running"
+                RESULT=1
+            fi
+        else
+            echo "    ${ACCEPTOR_NAME} does not define a port, cannot check acceptor"
+            RESULT=1
+        fi
+    done < <(xmlstarlet sel -N c="urn:activemq:core" -t -m "//c:acceptor" -c . -n ${CONFIG_FILE})
 
-result=0
-
-for acceptor in acceptors:
-  name = acceptor.get("name")
-  value = acceptor.text.strip()
-  print("{} value {}".format(name, value))
-  spliturl = urlsplit(value)
-  port = spliturl.port
-
-  print("{} port {}".format(name, port))
-
-  if port == None:
-    print("    {} does not define a port, cannot check acceptor".format(name))
-    result=1
-
-  try:
-    listening_ports.index(port)
-    print("    Transport is listening on port {}".format(port))
-  except ValueError as e:
-    print("    Nothing listening on port {}, transport not yet running".format(port))
-    result=1
-sys.exit(result)
+    exit ${RESULT}
 EOF
 )
 
@@ -97,7 +68,7 @@ while : ; do
     PROBE_MESSAGE="No configuration file located: ${CONFIG_FILE}"
 
     if [ -f "${CONFIG_FILE}" ] ; then
-        python3 -c "$EVALUATE_SCRIPT" >"${OUTPUT}" 2>"${ERROR}"
+        CONFIG_FILE="${CONFIG_FILE}" bash -c "${EVALUATE_SCRIPT}" >"${OUTPUT}" 2>"${ERROR}"
 
         CONNECT_RESULT=$?
         if [ true = "${DEBUG_SCRIPT}" ] ; then

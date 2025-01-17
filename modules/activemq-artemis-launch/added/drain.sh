@@ -48,13 +48,13 @@ echo "[drain.sh] $ENDPOINTS"
 count=0
 foundTarget="false"
 while true; do
-  ip=$(echo "$ENDPOINTS" | python3 -c "import sys, json; print(json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['ip'])")
+  ip=$(echo "$ENDPOINTS" | jq --argjson count ${count} -r '.subsets[0].addresses[$count].ip')
   if [ $? -ne 0 ]; then
     echo "[drain.sh] Can't find ip to scale down to tried ${count} ips"
     exit 1
   fi
   echo "[drain.sh] got ip ${ip} broker ip is ${BROKER_HOST}"
-  podName=$(echo "$ENDPOINTS" | python3 -c "import sys, json; print(json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['name'])")
+  podName=$(echo "$ENDPOINTS" | jq --argjson count ${count} -r '.subsets[0].addresses[$count].targetRef.name')
   if [ $? -ne 0 ]; then
     echo "[drain.sh] Can't find pod name to scale down to tried ${count}"
     exit 1
@@ -62,7 +62,7 @@ while true; do
   echo "[drain.sh] got podName ${podName} broker ip is ${BROKER_HOST}"
   if [ "$podName" != "$BROKER_HOST" ]; then
     # found an endpoint pod as a candidate for scaledown target
-    podNamespace=$(echo "$ENDPOINTS" | python3 -c "import sys, json; print(json.load(sys.stdin)['subsets'][0]['addresses'][${count}]['targetRef']['namespace'])")
+    podNamespace=$(echo "$ENDPOINTS" | jq --argjson count ${count} -r '.subsets[0].addresses[$count].targetRef.namespace')
     if [ $? -ne 0 ]; then
       echo "[drain.sh] Can't find pod namespace to scale down to tried ${count}"
       exit 1
@@ -135,7 +135,7 @@ waitForJolokia
 
 RET_CODE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector")
 
-HTTP_CODE=$(echo "$RET_CODE" | python3 -c "import sys, json; print(json.load(sys.stdin)['status'])")
+HTTP_CODE=$(echo "$RET_CODE" | jq -r '.status')
 
 echo "[drain.sh] curl return code ${HTTP_CODE}"
 
@@ -159,22 +159,11 @@ waitForJolokia
 echo "[drain.sh] checking messages are all drained"
 RET_VALUE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/AddressNames")
 
-PYCMD=$(cat <<EOF
-import sys, json
-addrs = ''
-value = json.load(sys.stdin)['value']
-for addr in value:
-    addrs = addrs + ' ' + addr
-print(addrs)
-EOF
-)
-all_addresses=$(echo "$RET_VALUE" | python3 -c "$PYCMD")
-arr=($all_addresses)
-for address in "${arr[@]}"
+for address in $(echo ${RET_VALUE} | jq -r '.value[]')
 do
   echo "[drain.sh] checking on address ${address}"
   M_COUNT=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22,address=%22${address}%22,component=addresses/MessageCount")
-  value=$(echo "$M_COUNT" | python3 -c "import sys, json; print(json.load(sys.stdin)['value'])")
+  value=$(echo "$M_COUNT" | jq -r '.value')
   if [[ $value -gt 0 ]]; then
     echo "[drain.sh] scaledown not complete. There are $value messages on address $address"
     "${instanceDir}/bin/artemis-service" stop
