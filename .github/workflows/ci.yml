@@ -33,7 +33,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH &&
           sudo apt-get update &&
           sudo apt-get install gcc libkrb5-dev &&
-          sudo pip install docker==5.0.3 docker-squash cekit odcs[client] packaging==21.3 behave lxml &&
+          sudo pip install docker==5.0.3 docker-squash cekit odcs[client] behave lxml &&
           wget -O source-to-image.tar.gz $S2I_RELEASE_URL &&
           tar -C $HOME/.local/bin -xvf source-to-image.tar.gz
 

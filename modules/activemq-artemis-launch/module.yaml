@@ -7,22 +7,22 @@ execute:
 
 artifacts:
   - name: netty-tcnative-classes
-    target: netty-tcnative-classes-2.0.66.Final.jar
-    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-classes/2.0.66.Final/netty-tcnative-classes-2.0.66.Final.jar
-    md5: 5e73ab5c5d6cfad33a0896d998e2c6c0
+    target: netty-tcnative-classes-2.0.69.Final.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-classes/2.0.69.Final/netty-tcnative-classes-2.0.69.Final.jar
+    md5: 1516a5419d13e6dfb1581a14bfae633b
   - name: netty-tcnative-0
-    target: netty-tcnative-boringssl-static-2.0.66.Final-linux-x86_64.jar
-    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.66.Final/netty-tcnative-boringssl-static-2.0.66.Final-linux-x86_64.jar
-    md5: 7f444618d30644a35cb84a88937f59f6
+    target: netty-tcnative-boringssl-static-2.0.69.Final-linux-x86_64.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.69.Final/netty-tcnative-boringssl-static-2.0.69.Final-linux-x86_64.jar
+    md5: b50375dc96d60217330540d95fabc68f
   - name: netty-tcnative-1
-    target: netty-tcnative-boringssl-static-2.0.66.Final-linux-aarch_64.jar
-    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.66.Final/netty-tcnative-boringssl-static-2.0.66.Final-linux-aarch_64.jar
-    md5: bb851f1f0c9867bd5a8a6556b2257a03
+    target: netty-tcnative-boringssl-static-2.0.69.Final-linux-aarch_64.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.69.Final/netty-tcnative-boringssl-static-2.0.69.Final-linux-aarch_64.jar
+    md5: f19c94710ee57fd5be13053eeacc74f5
   - name: netty-tcnative-2
-    target: netty-tcnative-boringssl-static-2.0.66.Final-osx-x86_64.jar
-    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.66.Final/netty-tcnative-boringssl-static-2.0.66.Final-osx-x86_64.jar
-    md5: b5627921866bd47dd70dd50c9d74f83c
+    target: netty-tcnative-boringssl-static-2.0.69.Final-osx-x86_64.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.69.Final/netty-tcnative-boringssl-static-2.0.69.Final-osx-x86_64.jar
+    md5: 9042f7210680c9b373a805e52b4fb03a
   - name: netty-tcnative-3
-    target: netty-tcnative-boringssl-static-2.0.66.Final-windows-x86_64.jar
-    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.66.Final/netty-tcnative-boringssl-static-2.0.66.Final-windows-x86_64.jar
-    md5: 9281b3e1a91022e690f687bed5ea36b5
+    target: netty-tcnative-boringssl-static-2.0.69.Final-windows-x86_64.jar
+    url: https://repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.69.Final/netty-tcnative-boringssl-static-2.0.69.Final-windows-x86_64.jar
+    md5: 39ac618a55a6325e4c7ce5987eb4e679
