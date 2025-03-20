@@ -77,8 +77,8 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.7.2.redhat-00002/jolokia-jvm-1.7.2.redhat-00002-sources.jar
     source-md5: c65460f570a95e2cfaf556097214427e
   - name: jolokia-javaagent-jar
-    target: javaagent.jar
-    dest: /opt/jolokia
+    target: "jolokia.jar"
+    dest: /opt/agents
     url: https://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia-parent/2.1.2.redhat_00001/1/maven/org/jolokia/jolokia-agent-jvm/2.1.2.redhat-00001/jolokia-agent-jvm-2.1.2.redhat-00001-javaagent.jar
     md5: b7385400293e77ff4979ab1faacddf51
     source-url: https://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia-parent/2.1.2.redhat_00001/1/maven/org/jolokia/jolokia-parent/2.1.2.redhat-00001/jolokia-parent-2.1.2.redhat-00001-project-sources.tar.gz
