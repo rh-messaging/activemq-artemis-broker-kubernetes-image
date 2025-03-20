@@ -2,8 +2,8 @@ schema_version: 1
 
 name: "arkmq-org/activemq-artemis-broker-kubernetes"
 description: "ActiveMQ Artemis broker kubernetes container image"
-version: "2.0.0"
-from: "quay.io/arkmq-org/activemq-artemis-broker@sha256:db70e59ab9b26d736b9ed769965e52ae65088351a588bb055c68e470cff8f0e8"
+version: "2.0.1"
+from: "quay.io/arkmq-org/activemq-artemis-broker@sha256:052bee4e1300b0b1255c8119044963a109b4a502becc5789078c61e9cc15e24c"
 
 labels:
   - name: "io.k8s.description"
@@ -153,8 +153,13 @@ artifacts:
     - name: "jolokia-javaagent-jar"
       url: https://repo.maven.apache.org/maven2/org/jolokia/jolokia-agent-jvm/2.1.2/jolokia-agent-jvm-2.1.2-javaagent.jar
       md5: "3af1d87a2bc49f243a5c5c486b2a676e"
-      dest: /opt/jolokia
-      target: "javaagent.jar"
+      dest: /opt/agents
+      target: "jolokia.jar"
+    - name: "prometheus-javaagent-jar"
+      url: https://github.com/prometheus/jmx_exporter/releases/download/1.2.0/jmx_prometheus_javaagent-1.2.0.jar
+      md5: "7ffa48717cbbef50e6433f387b263343"
+      dest: /opt/agents
+      target: "prometheus.jar"
 
 run:
   user: 185
