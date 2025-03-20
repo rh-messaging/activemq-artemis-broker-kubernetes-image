@@ -2,7 +2,7 @@ schema_version: 1
 
 name: "arkmq-org/activemq-artemis-broker-kubernetes"
 description: "ActiveMQ Artemis broker kubernetes container image"
-version: "2.0.1"
+version: "2.0.2"
 from: "quay.io/arkmq-org/activemq-artemis-broker@sha256:052bee4e1300b0b1255c8119044963a109b4a502becc5789078c61e9cc15e24c"
 
 labels:
