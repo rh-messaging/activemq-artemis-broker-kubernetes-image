@@ -1,0 +1,136 @@
+#See https://docs.cekit.io/en/latest/descriptor/overrides.html
+name: &name "amq-broker-7/amq-broker-7x-openshift-rhel9"
+description: "Red Hat AMQ Broker 7.x.x OpenShift container image"
+version: &version "7.x.x"
+from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-7x-rhel9@sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+labels:
+  - name: "io.k8s.display-name"
+    value: "Red Hat AMQ Broker 7.x.x"
+  - name: "io.openshift.tags"
+    value: "messaging,amq,java,jboss,xpaas"
+  - name: "com.redhat.component"
+    value: "amq-broker-rhel9-openshift-container"
+  - name: "org.jboss.product"
+    value: "amq"
+  - name: "org.jboss.product.version"
+    value: "7.x.x"
+  - name: "org.jboss.product.amq.version"
+    value: "7.x.x"
+envs:
+  - name: "JBOSS_PRODUCT"
+    value: "AMQ"
+  - name: "JBOSS_IMAGE_NAME"
+    value: *name
+  - name: "JBOSS_IMAGE_VERSION"
+    value: *version
+  - name: "JBOSS_AMQ_VERSION"
+    value: "7.x.x"
+  - name: "PRODUCT_VERSION"
+    value: "7.x.x"
+artifacts:
+  - name: openshift-ping-common
+    target: openshift-ping-common-1.2.6.Final-redhat-1.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-common/1.2.6.Final-redhat-1/openshift-ping-common-1.2.6.Final-redhat-1.jar
+    md5: 94f0bd57b1990b556890d99290bdd847
+    source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-common/1.2.6.Final-redhat-1/openshift-ping-common-1.2.6.Final-redhat-1-sources.jar
+    source-md5: 64630c5a5603329fe0e384c67a8a968e
+  - name: openshift-ping-dns
+    target: openshift-ping-dns-1.2.6.Final-redhat-1.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1.jar
+    md5: 59925c951d904b7734c2d10dc41a6515
+    source-url: http://download.eng.brq.redhat.com/brewroot/packages/org.openshift.ping-openshift-ping-parent/1.2.6.Final_redhat_1/1/maven/org/openshift/ping/openshift-ping-dns/1.2.6.Final-redhat-1/openshift-ping-dns-1.2.6.Final-redhat-1-sources.jar
+    source-md5: 9803ae8531e5386c57da88d119e6aaec
+  - name: netty-tcnative-classes
+    target: netty-tcnative-classes-x.x.x.Final-redhat-x.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/x.x.x.Final_redhat_x/1/maven/io/netty/netty-tcnative-classes/x.x.x.Final-redhat-x/netty-tcnative-classes-x.x.x.Final-redhat-x.jar
+    md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/x.Final_redhat_x/1/maven/io/netty/netty-tcnative-classes/x.Final-redhat-x/netty-tcnative-classes-x.Final-redhat-x-sources.jar
+    source-md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - name: netty-tcnative-0
+    target: netty-tcnative-x.Final-redhat-x-linux-x86_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/x.Final_redhat_x/1/maven/io/netty/netty-tcnative/x.Final-redhat-x/netty-tcnative-x.Final-redhat-x-linux-x86_64-fedora.jar
+    md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/x.Final_redhat_x/1/maven/io/netty/netty-tcnative-parent/x.Final-redhat-x/netty-tcnative-parent-x.Final-redhat-x-project-sources.tar.gz
+    source-md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - name: netty-tcnative-1
+    target: netty-tcnative-x.Final-redhat-x-linux-ppcle_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/x.Final_redhat_x/1/maven/io/netty/netty-tcnative/x.Final-redhat-x/netty-tcnative-x.Final-redhat-x-linux-ppcle_64-fedora.jar
+    md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/x.Final_redhat_x/1/maven/io/netty/netty-tcnative-parent-ppcle/x.Final-redhat-x/netty-tcnative-parent-ppcle-x.Final-redhat-x-project-sources.tar.gz
+    source-md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - name: netty-tcnative-2
+    target: netty-tcnative-x.Final-redhat-x-linux-s390_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/x.Final_redhat_x/1/maven/io/netty/netty-tcnative/x.Final-redhat-x/netty-tcnative-x.Final-redhat-x-linux-s390_64-fedora.jar
+    md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/x.Final_redhat_x/1/maven/io/netty/netty-tcnative-parent-s390x/x.Final-redhat-00001/netty-tcnative-parent-s390x-x.Final-redhat-00001-project-sources.tar.gz
+    source-md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - name: netty-tcnative-3
+    target: netty-tcnative-x.Final-redhat-x-linux-aarch_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/x.Final_redhat_x/1/maven/io/netty/netty-tcnative/x.Final-redhat-x/netty-tcnative-x.Final-redhat-x-linux-aarch_64-fedora.jar
+    md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/x.Final_redhat_x/1/maven/io/netty/netty-tcnative-parent-aarch/x.Final-redhat-00001/netty-tcnative-parent-aarch-x.Final-redhat-00001-project-sources.tar.gz
+    source-md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  - name: jolokia-jvm
+    target: jolokia-jvm-1.7.2.redhat-00002-agent.jar
+    url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.7.2.redhat-00002/jolokia-jvm-1.7.2.redhat-00002.jar
+    md5: 78ade0028090069800b4f1b0fa6abb20
+    source-url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.7.2.redhat-00002/jolokia-jvm-1.7.2.redhat-00002-sources.jar
+    source-md5: c65460f570a95e2cfaf556097214427e
+  - name: jolokia-javaagent-jar
+    target: "jolokia.jar"
+    dest: /opt/agents
+    url: https://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia-parent/2.1.2.redhat_00001/1/maven/org/jolokia/jolokia-agent-jvm/2.1.2.redhat-00001/jolokia-agent-jvm-2.1.2.redhat-00001-javaagent.jar
+    md5: b7385400293e77ff4979ab1faacddf51
+    source-url: https://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia-parent/2.1.2.redhat_00001/1/maven/org/jolokia/jolokia-parent/2.1.2.redhat-00001/jolokia-parent-2.1.2.redhat-00001-project-sources.tar.gz
+    source-md5: adba6e188850646ef9e421102ea042e1
+  - name: prometheus-javaagent-jar
+    target: "prometheus.jar"
+    dest: /opt/agents
+    url: https://download.devel.redhat.com/brewroot/packages/io.prometheus.jmx-jmx_exporter/1.2.0.redhat_00001/1/maven/io/prometheus/jmx/jmx_prometheus_javaagent/1.2.0.redhat-00001/jmx_prometheus_javaagent-1.2.0.redhat-00001.jar
+    md5: 3dd62f53aee9ea7434e0babb68cd3aa3
+    source-url: https://download.devel.redhat.com/brewroot/packages/io.prometheus.jmx-jmx_exporter/1.2.0.redhat_00001/1/maven/io/prometheus/jmx/jmx_prometheus_javaagent/1.2.0.redhat-00001/jmx_prometheus_javaagent-1.2.0.redhat-00001-sources.jar
+    source-md5: 28ed409ff251b4205c7fa6d5db1caf05
+modules:
+  repositories:
+    - name: cct_module
+      git:
+        url: https://github.com/artemiscloud/cct_module.git
+        ref: 0.38.0-amq-2
+packages:
+  content_sets:
+    x86_64:
+      - rhel-9-for-x86_64-baseos-rpms
+      - rhel-9-for-x86_64-appstream-rpms
+    s390x:
+      - rhel-9-for-s390x-baseos-rpms
+      - rhel-9-for-s390x-appstream-rpms
+    ppc64le:
+      - rhel-9-for-ppc64le-baseos-rpms
+      - rhel-9-for-ppc64le-appstream-rpms
+    aarch64:
+      - rhel-9-for-aarch64-baseos-rpms
+      - rhel-9-for-aarch64-appstream-rpms
+  install:
+    - apr
+    - procps-ng
+    - openssl
+osbs:
+  configuration:
+    container: #See https://osbs.readthedocs.io/en/latest/users.html#image-configuration
+      compose:
+        signing_intent: release
+        pulp_repos: true
+      platforms:
+        only:
+          - x86_64
+          - s390x
+          - ppc64le
+          - aarch64
+      image_build_method: imagebuilder
+      tags:
+        - "7.x.x.CON.1.CR1"
+        - "7.x.x.CON.1"
+        - "7.x.x"
+  repository:
+    name: containers/amq-broker
+    branch: amq-broker-7.x-openshift-rhel-9
