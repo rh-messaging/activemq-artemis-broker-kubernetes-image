@@ -10,11 +10,11 @@ mkdir -p ${DEST}
 mkdir -p ${DEST}/conf/
 
 if ! ls $AMQ_HOME/lib/artemis-prometheus-metrics-plugin*.jar; then
-  curl --fail -L --output "$AMQ_HOME/lib/artemis-prometheus-metrics-plugin-2.0.0.redhat-00002.jar" https://maven.repository.redhat.com/ga/com/redhat/amq-broker/artemis-prometheus-metrics-plugin/2.0.0.redhat-00002/artemis-prometheus-metrics-plugin-2.0.0.redhat-00002.jar
+  curl --fail -L --output "$AMQ_HOME/lib/artemis-prometheus-metrics-plugin-3.1.0.jar" https://github.com/rh-messaging/artemis-prometheus-metrics-plugin/releases/download/v3.1.0/artemis-prometheus-metrics-plugin-3.1.0.jar
 fi
 
 if ! ls $AMQ_HOME/web/metrics.war; then
-  curl --fail -L --output "$AMQ_HOME/web/metrics.war" https://maven.repository.redhat.com/ga/com/redhat/amq-broker/artemis-prometheus-metrics-plugin-servlet/2.0.0.redhat-00002/artemis-prometheus-metrics-plugin-servlet-2.0.0.redhat-00002.war
+  curl --fail -L --output "$AMQ_HOME/web/metrics.war" https://github.com/rh-messaging/artemis-prometheus-metrics-plugin/releases/download/v3.1.0/metrics.war
 fi
 
 if ! ls $AMQ_HOME/lib/keycloak-adapter-core*.jar; then
