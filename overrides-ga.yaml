@@ -9,7 +9,7 @@ labels:
   - name: "io.openshift.tags"
     value: "messaging,amq,java,jboss,xpaas"
   - name: "com.redhat.component"
-    value: "amq-broker-rhel9-openshift-container"
+    value: "amq-broker-openshift-rhel9-container"
   - name: "org.jboss.product"
     value: "amq"
   - name: "org.jboss.product.version"
