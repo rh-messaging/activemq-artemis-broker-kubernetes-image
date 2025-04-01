@@ -59,11 +59,11 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.70.Final_redhat_00003/1/maven/io/netty/netty-tcnative-parent-ppcle/2.0.70.Final-redhat-00003/netty-tcnative-parent-ppcle-2.0.70.Final-redhat-00003-project-sources.tar.gz
     source-md5: 6f7504954d4070ab0aef92594cbb6052
   - name: netty-tcnative-2
-    target: netty-tcnative-2.0.61.Final-redhat-00006-linux-s390_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.61.Final_redhat_00006/1/maven/io/netty/netty-tcnative/2.0.61.Final-redhat-00006/netty-tcnative-2.0.61.Final-redhat-00006-linux-s390_64-fedora.jar
-    md5: d9343e52bc150271f301322529d54bec
-    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.61.Final_redhat_00006/1/maven/io/netty/netty-tcnative-parent-s390x/2.0.61.Final-redhat-00006/netty-tcnative-parent-s390x-2.0.61.Final-redhat-00006-project-sources.tar.gz
-    source-md5: 20bb05736cb82329d8a2ad3c7d874d96
+    target: netty-tcnative-2.0.70.Final-redhat-00003-linux-s390_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.70.Final_redhat_00003/1/maven/io/netty/netty-tcnative/2.0.70.Final-redhat-00003/netty-tcnative-2.0.70.Final-redhat-00003-linux-s390_64-fedora.jar
+    md5: 2e8b5f10220eeb3adbb19c567b962ab5
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.70.Final_redhat_00003/1/maven/io/netty/netty-tcnative-parent-s390x/2.0.70.Final-redhat-00003/netty-tcnative-parent-s390x-2.0.70.Final-redhat-00003-project-sources.tar.gz
+    source-md5: 5f95019fc6d705ea45eaf2988418c10c
   - name: jolokia-jvm
     target: jolokia-jvm-1.7.2.redhat-00002-agent.jar
     url: http://download.devel.redhat.com/brewroot/packages/org.jolokia-jolokia/1.7.2.redhat_00002/1/maven/org/jolokia/jolokia-jvm/1.7.2.redhat-00002/jolokia-jvm-1.7.2.redhat-00002.jar
