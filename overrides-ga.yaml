@@ -128,7 +128,7 @@ osbs:
           - aarch64
       image_build_method: imagebuilder
       tags:
-        - "7.13.0.CON.1.CR1"
+        - "7.13.0.CON.1.CR2"
         - "7.13.0.CON.1"
         - "7.13.0"
   repository:
