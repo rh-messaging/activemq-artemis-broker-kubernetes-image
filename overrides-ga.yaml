@@ -27,9 +27,6 @@ envs:
     value: "7.13.0"
   - name: "PRODUCT_VERSION"
     value: "7.13.0"
-  # The custom openssl configuration is required to avoid the error:14187180:SSL routines:ssl_do_config:bad value on RHEL9
-  - name: "OPENSSL_CONF"
-    value: "/usr/local/etc/openssl.cnf"
 artifacts:
   - name: openshift-ping-common
     target: openshift-ping-common-1.2.6.Final-redhat-1.jar
@@ -93,16 +90,15 @@ artifacts:
     md5: 3dd62f53aee9ea7434e0babb68cd3aa3
     source-url: https://download.devel.redhat.com/brewroot/packages/io.prometheus.jmx-jmx_exporter/1.2.0.redhat_00001/1/maven/io/prometheus/jmx/jmx_prometheus_javaagent/1.2.0.redhat-00001/jmx_prometheus_javaagent-1.2.0.redhat-00001-sources.jar
     source-md5: 28ed409ff251b4205c7fa6d5db1caf05
-  - name: openssl.cnf
-    dest: /usr/local/etc
-    path: local-artifacts/openssl.cnf
-    md5: 4851639df414382c6d7de4392441f5f0
 modules:
   repositories:
     - name: cct_module
       git:
         url: https://github.com/artemiscloud/cct_module.git
         ref: 0.38.0-amq-2
+  install:
+    # The custom openssl configuration is required to avoid the error:14187180:SSL routines:ssl_do_config:bad value on RHEL9
+    - name: openssl-config-patch
 packages:
   content_sets:
     x86_64:
