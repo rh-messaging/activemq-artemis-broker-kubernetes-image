@@ -66,9 +66,9 @@ artifacts:
     source-md5: bfccb12001651f2d50e8258c4f73fa41
   - name: netty-tcnative-3
     target: netty-tcnative-2.0.72.Final-redhat-00001-linux-aarch_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.72.Final-redhat-00001/netty-tcnative-2.0.72.Final-redhat-00001-linux-aarch_64-fedora.jar
+    url: http://download-01.beak-001.prod.iad2.dc.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.72.Final-redhat-00001/netty-tcnative-2.0.72.Final-redhat-00001-linux-aarch_64-fedora.jar
     md5: 47ad9a6f2e89cfa2aba76f4867b39be6
-    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-aarch/2.0.72.Final-redhat-00001/netty-tcnative-parent-aarch-2.0.72.Final-redhat-00001-project-sources.tar.gz
+    source-url: http://download-01.beak-001.prod.iad2.dc.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-aarch/2.0.72.Final-redhat-00001/netty-tcnative-parent-aarch-2.0.72.Final-redhat-00001-project-sources.tar.gz
     source-md5: a6cde33479ae5683188d5203d886d615
   - name: jolokia-jvm
     target: jolokia-jvm-1.7.2.redhat-00002-agent.jar
