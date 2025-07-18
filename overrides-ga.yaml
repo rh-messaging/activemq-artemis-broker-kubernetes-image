@@ -42,9 +42,9 @@ artifacts:
     source-md5: 9803ae8531e5386c57da88d119e6aaec
   - name: netty-tcnative-classes
     target: netty-tcnative-classes-2.0.72.Final-redhat-00001.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.72.Final-redhat-00001/netty-tcnative-classes-2.0.72.Final-redhat-00001.jar
+    url: http://download-01.beak-001.prod.iad2.dc.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.72.Final-redhat-00001/netty-tcnative-classes-2.0.72.Final-redhat-00001.jar
     md5: 6e3a0fad6302ef85c03c817b48b39abe
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.72.Final-redhat-00001/netty-tcnative-classes-2.0.72.Final-redhat-00001-sources.jar
+    source-url: http://download-01.beak-001.prod.iad2.dc.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.72.Final-redhat-00001/netty-tcnative-classes-2.0.72.Final-redhat-00001-sources.jar
     source-md5: bd81ff60e2bf7fc0bd34eaec6f526280
   - name: netty-tcnative-0
     target: netty-tcnative-2.0.72.Final-redhat-00001-linux-x86_64-fedora.jar
