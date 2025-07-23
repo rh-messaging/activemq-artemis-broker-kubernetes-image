@@ -53,11 +53,11 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent/2.0.72.Final-redhat-00001/netty-tcnative-parent-2.0.72.Final-redhat-00001-project-sources.tar.gz
     source-md5: 87d80fbbac1d12357fd320e84c0acc7e
   - name: netty-tcnative-1
-    target: netty-tcnative-x.Final-redhat-x-linux-ppcle_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/x.Final_redhat_x/1/maven/io/netty/netty-tcnative/x.Final-redhat-x/netty-tcnative-x.Final-redhat-x-linux-ppcle_64-fedora.jar
-    md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/x.Final_redhat_x/1/maven/io/netty/netty-tcnative-parent-ppcle/x.Final-redhat-x/netty-tcnative-parent-ppcle-x.Final-redhat-x-project-sources.tar.gz
-    source-md5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    target: netty-tcnative-2.0.72.Final-redhat-00001-linux-ppcle_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.72.Final-redhat-00001/netty-tcnative-2.0.72.Final-redhat-00001-linux-ppcle_64-fedora.jar
+    md5: b2f88d890810f3167ae9a3010636537f
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-ppcle/2.0.72.Final-redhat-00001/netty-tcnative-parent-ppcle-2.0.72.Final-redhat-00001-project-sources.tar.gz
+    source-md5: c845ea64d6cc8d1a5b3b039d6d2ecec4
   - name: netty-tcnative-2
     target: netty-tcnative-x.Final-redhat-x-linux-s390_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/x.Final_redhat_x/1/maven/io/netty/netty-tcnative/x.Final-redhat-x/netty-tcnative-x.Final-redhat-x-linux-s390_64-fedora.jar
