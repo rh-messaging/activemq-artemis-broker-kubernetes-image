@@ -48,9 +48,9 @@ artifacts:
     source-md5: bd81ff60e2bf7fc0bd34eaec6f526280
   - name: netty-tcnative-0
     target: netty-tcnative-2.0.72.Final-redhat-00001-linux-x86_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.72.Final-redhat-00001/netty-tcnative-2.0.72.Final-redhat-00001-linux-x86_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/2/maven/io/netty/netty-tcnative/2.0.72.Final-redhat-00001/netty-tcnative-2.0.72.Final-redhat-00001-linux-x86_64-fedora.jar
     md5: 0451ca59199ea66404cd63f0bbe4959a
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent/2.0.72.Final-redhat-00001/netty-tcnative-parent-2.0.72.Final-redhat-00001-project-sources.tar.gz
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.72.Final_redhat_00001/2/maven/io/netty/netty-tcnative-parent/2.0.72.Final-redhat-00001/netty-tcnative-parent-2.0.72.Final-redhat-00001-project-sources.tar.gz
     source-md5: 87d80fbbac1d12357fd320e84c0acc7e
   - name: netty-tcnative-1
     target: netty-tcnative-2.0.72.Final-redhat-00001-linux-ppcle_64-fedora.jar
