@@ -72,6 +72,12 @@ artifacts:
     md5: ac46c13d465be4b91ac3729e0de4bea0
     source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.74.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent/2.0.74.Final-redhat-00001/netty-tcnative-parent-2.0.74.Final-redhat-00001-project-sources.tar.gz
     source-md5: c2c9b29cf884e9e2dda7272befaad28f
+  - name: netty-tcnative-3
+    target: netty-tcnative-2.0.74.Final-redhat-00001-linux-aarch_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.74.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.74.Final-redhat-00001/netty-tcnative-2.0.74.Final-redhat-00001-linux-aarch_64-fedora.jar
+    md5: 5dd01b585b19365ee003e2d9ef13aa6d
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.74.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-aarch/2.0.74.Final-redhat-00001/netty-tcnative-parent-aarch-2.0.74.Final-redhat-00001-project-sources.tar.gz
+    source-md5: 41acda499215ddf890623a50a5cd6632
 modules:
   repositories:
     - name: cct_module
