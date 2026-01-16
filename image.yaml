@@ -11,7 +11,7 @@ labels:
   - name: "io.k8s.display-name"
     value: "ActiveMQ Artemis Broker"
   - name: "maintainer"
-    value: "rkieley@redhat.com"
+    value: "ArkMQ <info@arkmq.org>"
   - name: "io.openshift.tags"
     value: "messaging,activemq,artemis,java,xpaas"
   - name: "io.openshift.s2i.scripts-url"
