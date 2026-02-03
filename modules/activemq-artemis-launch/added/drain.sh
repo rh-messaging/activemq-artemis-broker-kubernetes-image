@@ -135,11 +135,15 @@ waitForJolokia
 
 RET_CODE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector")
 
+EXT_CODE=$?
+echo "[drain.sh] curl exit code ${EXT_CODE}"
+
 HTTP_CODE=$(echo "$RET_CODE" | jq -r '.status')
 
 echo "[drain.sh] curl return code ${HTTP_CODE}"
 
-if [ "${HTTP_CODE}" != "200" ]; then
+#since Apache Artemis 2.50.0 scaledown causes an empty reply and curl returns with the code 52
+if [ "${EXT_CODE}" != "52" ] && [ "${HTTP_CODE}" != "200" ]; then
   echo "[drain.sh] scaleDown is not successful, response: $RET_CODE"
   echo "[drain.sh] sleeping for 30 seconds to allow inspection before it restarts"
   sleep 30
