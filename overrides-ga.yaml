@@ -10,6 +10,8 @@ labels:
     value: "messaging,amq,java,jboss,xpaas"
   - name: "com.redhat.component"
     value: "amq-broker-openshift-rhel9-container"
+  - name: "maintainer"
+    value: "Red Hat, Inc."
   - name: "org.jboss.product"
     value: "amq"
   - name: "org.jboss.product.version"
