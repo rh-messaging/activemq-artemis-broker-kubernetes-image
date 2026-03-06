@@ -72,8 +72,8 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: 'arkmq-org-broker-init-image',
+              ref: context.ref,
               workflow_id: 'update.yml',
-              ref: 'main',
               inputs: {
                 version: '*.*.+',
                 update_version: 'true',
