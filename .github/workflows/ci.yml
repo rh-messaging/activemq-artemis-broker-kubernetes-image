@@ -2,7 +2,6 @@ name: CI
 
 env:
   IMAGE_NAME: arkmq-org-broker-kubernetes
-  S2I_RELEASE_URL: https://github.com/openshift/source-to-image/releases/download/v1.3.1/source-to-image-v1.3.1-a5a77147-linux-amd64.tar.gz
 
 on:
   pull_request:
@@ -61,9 +60,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH &&
           sudo apt-get update &&
           sudo apt-get install gcc libkrb5-dev &&
-          sudo pip install cekit odcs[client] behave lxml &&
-          wget -O source-to-image.tar.gz $S2I_RELEASE_URL &&
-          tar -C $HOME/.local/bin -xvf source-to-image.tar.gz
+          sudo pip install cekit odcs[client]
 
       - name: Checkout the repo
         uses: actions/checkout@v6
