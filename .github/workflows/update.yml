@@ -43,6 +43,8 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
 
       - name: Set up the repo
         run: |
@@ -71,7 +73,7 @@ jobs:
             BASE_IMAGE="${{ inputs.base_image }}"
           fi
           sed -i "s~from.*~from: \"${BASE_IMAGE}\"~g" image.yaml
-          git commit --all --message "Update base image to ${BASE_IMAGE}" || echo "nothing to commit"
+          git commit --all --message "[NO-ISSUE] Update base image to ${BASE_IMAGE}" || echo "nothing to commit"
 
       - name: Update netty-tcnative
         run: |
@@ -97,7 +99,7 @@ jobs:
             sed -i "/name: netty-tcnative-${NETTY_TCNATIVE_INDEX}/,/md5:/ s~md5:.*~md5: ${NETTY_TCNATIVE_MD5}~" modules/apache-artemis-launch/module.yaml
             NETTY_TCNATIVE_INDEX=$((NETTY_TCNATIVE_INDEX + 1))
           done
-          git commit --all --message "Upgrade netty-tcnative to ${NETTY_TCNATIVE_VERSION}" || echo "Nothing to commit"
+          git commit --all --message "[NO-ISSUE] Upgrade netty-tcnative to ${NETTY_TCNATIVE_VERSION}" || echo "Nothing to commit"
 
       - name: Push commits
         run: |
