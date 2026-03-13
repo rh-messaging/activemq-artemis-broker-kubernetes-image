@@ -35,8 +35,6 @@ The image special tags are:
 
 - `latest` - points to the image built from the sources of the latest release tag.
 
-- - `dev.DATE.COMMIT_ID` - points to the image built from the sources of the main branch on specific date and commit id, it should be used only for development purposes. ie: `dev.20231106.8dbe9eb`. It expires in 3 months
-
-- `dev.latest` - points to the image built from the latest sources of the main branch, it should be used only for development purposes and it is regenerated on each commit on main branch.
+- `dev.latest` - points to the image built from the latest sources of the main branch, it should be used only for development purposes and it is regenerated on each push on main branch.
 
 - `snapshot` - points to the image built from the latest sources of the main branch and contains the snapshot version of Apache Artemis.
