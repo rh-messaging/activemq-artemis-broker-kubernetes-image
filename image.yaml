@@ -2,8 +2,8 @@ schema_version: 1
 
 name: "arkmq-org/arkmq-org-broker-kubernetes"
 description: "ArkMQ Broker Kubernetes is a container image for running Apache Artemis messaging broker in containerized environments"
-version: "3.0.1"
-from: "quay.io/arkmq-org/arkmq-org-broker@sha256:2647a91a13f65c5a343308ce43a056a81fa54a8ad7ff8713baa125a6defb3c5b"
+version: "3.0.2"
+from: "quay.io/arkmq-org/arkmq-org-broker@sha256:060d9a2d3f7f2505873d58075c2066b3255757aa067235a754d04c18dece6a8c"
 
 labels:
   - name: "io.k8s.description"
@@ -39,6 +39,12 @@ envs:
   - name: AMQ_NAME
     example: broker
     description: Name of the Broker corresponding to AMQ_NAME
+  - name: AMQ_BROKER_HOST
+    example: broker
+    description: Hostname or IP address of the broker. If not set, it defaults to the output of `hostname -f` at runtime.
+  - name: AMQ_WEB_HOST
+    example: broker
+    description: Hostname or IP address of the web server. If not set, it defaults to the output of `hostname -f` at runtime.
   - name: AMQ_ADDRESSES
     example: mytopic
     description: Comma separated list of addresses
@@ -168,7 +174,9 @@ artifacts:
       target: "prometheus.jar"
 
 run:
-  user: 185
+  # The user is in the group 0 to have access to the volumes mounted
+  # by Kubernetes that are typically owned by UID 0 (root) and GID 0 (root).
+  user: "185:0"
   cmd:
     - "/opt/amq/bin/launch.sh"
     - "start"
