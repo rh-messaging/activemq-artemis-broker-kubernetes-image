@@ -75,11 +75,11 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.75.Final_redhat_00003/1/maven/io/netty/netty-tcnative-classes/2.0.75.Final-redhat-00003/netty-tcnative-classes-2.0.75.Final-redhat-00003-sources.jar
     source-md5: 6f77c6289d2fd7c570db009673ea8c6c
   - name: netty-tcnative-0
-    target: netty-tcnative-2.0.75.Final-redhat-00002-linux-x86_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.75.Final_redhat_00002/1/maven/io/netty/netty-tcnative/2.0.75.Final-redhat-00002/netty-tcnative-2.0.75.Final-redhat-00002-linux-x86_64-fedora.jar
-    md5: b39472b9be80250b0ec4c516f2a75b81
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.75.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.75.Final-redhat-00002/netty-tcnative-parent-2.0.75.Final-redhat-00002-project-sources.tar.gz
-    source-md5: 0423414ec63840690c40e19cfd5c23c7
+    target: netty-tcnative-2.0.75.Final-redhat-00003-linux-x86_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.75.Final_redhat_00003/1/maven/io/netty/netty-tcnative/2.0.75.Final-redhat-00003/netty-tcnative-2.0.75.Final-redhat-00003-linux-x86_64-fedora.jar
+    md5: 79b077145b7b1d6824b62b33648741b5
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.75.Final_redhat_00003/1/maven/io/netty/netty-tcnative-parent/2.0.75.Final-redhat-00003/netty-tcnative-parent-2.0.75.Final-redhat-00003-project-sources.tar.gz
+    source-md5: d8e22e0ae43bffe6e5eaf8247b816c6a
   - name: netty-tcnative-3
     target: netty-tcnative-2.0.75.Final-redhat-00003-linux-aarch_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.75.Final_redhat_00003/1/maven/io/netty/netty-tcnative/2.0.75.Final-redhat-00003/netty-tcnative-2.0.75.Final-redhat-00003-linux-aarch_64-fedora.jar
