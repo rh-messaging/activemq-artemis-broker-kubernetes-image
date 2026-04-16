@@ -183,7 +183,7 @@ function appendAcceptorsFromEnv() {
       # As AMQ_ACCEPTORS was introduced from the operator, the operator makes a safe string for here
       safeAcceptorsFromEnv=$(echo "${acceptorsFromEnv}")
       sed -i "/<\/acceptors>/ s/.*/${safeAcceptorsFromEnv}\n&/g" ${instanceDir}/etc/broker.xml
-      sed -i "s/BROKER_HOST/${BROKER_HOST}/g" ${instanceDir}/etc/broker.xml
+      sed -i "s/ACCEPTOR_IP/${BROKER_HOST}/g" ${instanceDir}/etc/broker.xml
   fi
 }
 
