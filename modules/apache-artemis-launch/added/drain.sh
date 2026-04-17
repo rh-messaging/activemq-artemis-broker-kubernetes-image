@@ -6,11 +6,9 @@ if [ -z "${DRAINER_HOST}" ]; then
   exit 1
 fi
 
-# use pod IP rather than `hostname -f` which will return pod's name
-# that is not resolvable across the cluster
-export BROKER_HOST=${DRAINER_HOST}
-
-echo "[drain.sh] drainer container ip is $BROKER_HOST"
+# DRAINER_HOST is set to the pod's IP, we want to use it rather than `hostname -f`
+# which will return pod's name that is not resolvable across the cluster
+echo "[drain.sh] drainer container ip is $DRAINER_HOST"
 
 instanceDir="${HOME}/${AMQ_NAME}"
 
@@ -27,7 +25,7 @@ function waitForJolokia() {
   while : ;
   do
     sleep 5
-    curl -s -o /dev/null -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia"
+    curl -s -o /dev/null -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${DRAINER_HOST}:8161/console/jolokia"
     if [ $? -eq 0 ]; then
       break
     fi
@@ -53,14 +51,14 @@ while true; do
     echo "[drain.sh] Can't find ip to scale down to tried ${count} ips"
     exit 1
   fi
-  echo "[drain.sh] got ip ${ip} broker ip is ${BROKER_HOST}"
+  echo "[drain.sh] got ip ${ip} broker ip is ${DRAINER_HOST}"
   podName=$(echo "$ENDPOINTS" | jq --argjson count ${count} -r '.subsets[0].addresses[$count].targetRef.name')
   if [ $? -ne 0 ]; then
     echo "[drain.sh] Can't find pod name to scale down to tried ${count}"
     exit 1
   fi
-  echo "[drain.sh] got podName ${podName} broker ip is ${BROKER_HOST}"
-  if [ "$podName" != "$BROKER_HOST" ]; then
+  echo "[drain.sh] got podName ${podName} broker ip is ${DRAINER_HOST}"
+  if [ "$podName" != "$DRAINER_HOST" ]; then
     # found an endpoint pod as a candidate for scaledown target
     podNamespace=$(echo "$ENDPOINTS" | jq --argjson count ${count} -r '.subsets[0].addresses[$count].targetRef.namespace')
     if [ $? -ne 0 ]; then
@@ -118,12 +116,12 @@ echo "[drain.sh] scale down target is: $SCALE_TO_BROKER"
 connector="<connector name=\"scaledownconnector\">tcp:\/\/${SCALE_TO_BROKER}:61616<\/connector>"
 sed -i "/<\/connectors>/ s/.*/${connector}\n&/" "${instanceDir}/etc/broker.xml"
 
-connector="<connector name=\"artemis\">tcp:\/\/${BROKER_HOST}:61616<\/connector>"
+connector="<connector name=\"artemis\">tcp:\/\/${DRAINER_HOST}:61616<\/connector>"
 sed -i "s/<connector name=\"artemis\">.*<\/connector>/${connector}/" "${instanceDir}/etc/broker.xml"
 
 # Remove the acceptors
 #sed -i -ne "/<acceptors>/ {p;   " -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" ${instanceDir}/etc/broker.xml
-acceptor="<acceptor name=\"artemis\">tcp:\/\/${BROKER_HOST}:61616?protocols=CORE<\/acceptor>"
+acceptor="<acceptor name=\"artemis\">tcp:\/\/${DRAINER_HOST}:61616?protocols=CORE<\/acceptor>"
 sed -i -ne "/<acceptors>/ {p; i $acceptor" -e ":a; n; /<\/acceptors>/ {p; b}; ba}; p" "${instanceDir}/etc/broker.xml"
 
 #start the broker and issue the scaledown command to drain the messages.
@@ -133,7 +131,7 @@ tail -n 100 -f "${AMQ_NAME}/log/artemis.log" &
 
 waitForJolokia
 
-RET_CODE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector")
+RET_CODE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${DRAINER_HOST}:8161/console/jolokia/exec/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/scaleDown/scaledownconnector")
 
 EXT_CODE=$?
 echo "[drain.sh] curl exit code ${EXT_CODE}"
@@ -161,12 +159,12 @@ fi
 waitForJolokia
 
 echo "[drain.sh] checking messages are all drained"
-RET_VALUE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/AddressNames")
+RET_VALUE=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${DRAINER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22/AddressNames")
 
 for address in $(echo ${RET_VALUE} | jq -r '.value[]')
 do
   echo "[drain.sh] checking on address ${address}"
-  M_COUNT=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${BROKER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22,address=%22${address}%22,component=addresses/MessageCount")
+  M_COUNT=$(curl -G -k "http://${AMQ_USER}:${AMQ_PASSWORD}@${DRAINER_HOST}:8161/console/jolokia/read/org.apache.activemq.artemis:broker=%22${AMQ_NAME}%22,address=%22${address}%22,component=addresses/MessageCount")
   value=$(echo "$M_COUNT" | jq -r '.value')
   if [[ $value -gt 0 ]]; then
     echo "[drain.sh] scaledown not complete. There are $value messages on address $address"
