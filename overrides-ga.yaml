@@ -68,6 +68,12 @@ artifacts:
     md5: 3dd62f53aee9ea7434e0babb68cd3aa3
     source-url: https://download.devel.redhat.com/brewroot/packages/io.prometheus.jmx-jmx_exporter/1.2.0.redhat_00001/1/maven/io/prometheus/jmx/jmx_prometheus_javaagent/1.2.0.redhat-00001/jmx_prometheus_javaagent-1.2.0.redhat-00001-sources.jar
     source-md5: 28ed409ff251b4205c7fa6d5db1caf05
+  - name: netty-tcnative-classes
+    target: netty-tcnative-classes-2.0.77.Final-redhat-00001.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.77.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.77.Final-redhat-00001/netty-tcnative-classes-2.0.77.Final-redhat-00001.jar
+    md5: af424f06e41fb19afd4eda2c2d1b0a99
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.77.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.77.Final-redhat-00001/netty-tcnative-classes-2.0.77.Final-redhat-00001-sources.jar
+    source-md5: 16c81cc44556b069ed8330d55d54ff54
 modules:
   repositories:
     - name: cct_module
