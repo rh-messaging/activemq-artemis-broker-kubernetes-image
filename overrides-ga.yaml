@@ -93,11 +93,11 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.81.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-ppcle/2.0.81.Final-redhat-00001/netty-tcnative-parent-ppcle-2.0.81.Final-redhat-00001-project-sources.tar.gz
     source-md5: f845db275913392c9c147e32832f2dc0
   - name: netty-tcnative-2
-    target: netty-tcnative-2.0.80.Final-redhat-00001-linux-s390_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.80.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.80.Final-redhat-00001/netty-tcnative-2.0.80.Final-redhat-00001-linux-s390_64-fedora.jar
-    md5: 67101208681dafcd5b71a13e7db21f31
-    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.80.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-s390x/2.0.80.Final-redhat-00001/netty-tcnative-parent-s390x-2.0.80.Final-redhat-00001-project-sources.tar.gz
-    source-md5: 2d3f4ec9ae6bb29ba23f7270c8ab3571
+    target: netty-tcnative-2.0.81.Final-redhat-00001-linux-s390_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.81.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.81.Final-redhat-00001/netty-tcnative-2.0.81.Final-redhat-00001-linux-s390_64-fedora.jar
+    md5: f97feac4d07008be9bac11aa5d7800c8
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-s390x/2.0.81.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-s390x/2.0.81.Final-redhat-00001/netty-tcnative-parent-s390x-2.0.81.Final-redhat-00001-project-sources.tar.gz
+    source-md5: 779eaf9c225c014cc8a43a099fa68423
 modules:
   repositories:
     - name: cct_module
