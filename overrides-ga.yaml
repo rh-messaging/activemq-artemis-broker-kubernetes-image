@@ -63,11 +63,11 @@ artifacts:
     source-url: https://download.devel.redhat.com/brewroot/packages/io.prometheus.jmx-jmx_exporter/1.2.0.redhat_00001/1/maven/io/prometheus/jmx/jmx_prometheus_javaagent/1.2.0.redhat-00001/jmx_prometheus_javaagent-1.2.0.redhat-00001-sources.jar
     source-md5: 28ed409ff251b4205c7fa6d5db1caf05
   - name: netty-tcnative-classes
-    target: netty-tcnative-classes-2.0.78.Final-redhat-00002.jar
-    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.78.Final_redhat_00002/1/maven/io/netty/netty-tcnative-classes/2.0.78.Final-redhat-00002/netty-tcnative-classes-2.0.78.Final-redhat-00002.jar
-    md5: ff190b6ea2f6a6ab07804a6d9d14c5eb
-    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.78.Final_redhat_00002/1/maven/io/netty/netty-tcnative-classes/2.0.78.Final-redhat-00002/netty-tcnative-classes-2.0.78.Final-redhat-00002-sources.jar
-    source-md5: 62770d698866b8e906071fe5fc588d1b
+    target: netty-tcnative-classes-2.0.81.Final-redhat-00001.jar
+    url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.81.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.81.Final-redhat-00001/netty-tcnative-classes-2.0.81.Final-redhat-00001.jar
+    md5: 478528a37055335e958db4770178d599
+    source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.81.Final_redhat_00001/1/maven/io/netty/netty-tcnative-classes/2.0.81.Final-redhat-00001/netty-tcnative-classes-2.0.81.Final-redhat-00001-sources.jar
+    source-md5: ab36cd7c61a5ac08b94beb4230faf156
   - name: netty-tcnative-0
     target: netty-tcnative-2.0.78.Final-redhat-00002-linux-x86_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.78.Final_redhat_00002/1/maven/io/netty/netty-tcnative/2.0.78.Final-redhat-00002/netty-tcnative-2.0.78.Final-redhat-00002-linux-x86_64-fedora.jar
