@@ -81,11 +81,11 @@ artifacts:
     source-url: http://download.devel.redhat.com/brewroot/packages/io.netty-netty-tcnative-parent/2.0.84.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent/2.0.84.Final-redhat-00002/netty-tcnative-parent-2.0.84.Final-redhat-00002-project-sources.tar.gz
     source-md5: 3eda44b38f88249d8a37738809bd99f6
   - name: netty-tcnative-3
-    target: netty-tcnative-2.0.84.Final-redhat-00001-linux-aarch_64-fedora.jar
-    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.84.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.84.Final-redhat-00001/netty-tcnative-2.0.84.Final-redhat-00001-linux-aarch_64-fedora.jar
-    md5: 845252e8be11ea392e427c8a9d180ed9
-    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.84.Final_redhat_00001/1/maven/io/netty/netty-tcnative-parent-aarch/2.0.84.Final-redhat-00001/netty-tcnative-parent-aarch-2.0.84.Final-redhat-00001-project-sources.tar.gz
-    source-md5: 3afaf07dbc360543c25ebe64774a8098
+    target: netty-tcnative-2.0.84.Final-redhat-00002-linux-aarch_64-fedora.jar
+    url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.84.Final_redhat_00002/1/maven/io/netty/netty-tcnative/2.0.84.Final-redhat-00002/netty-tcnative-2.0.84.Final-redhat-00002-linux-aarch_64-fedora.jar
+    md5: 8c94f4fbbf40b8dc1e4b340e8f46e7ef
+    source-url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-aarch/2.0.84.Final_redhat_00002/1/maven/io/netty/netty-tcnative-parent-aarch/2.0.84.Final-redhat-00002/netty-tcnative-parent-aarch-2.0.84.Final-redhat-00002-project-sources.tar.gz
+    source-md5: b4fed6200acb85324d07b84a9793d9cc
   - name: netty-tcnative-1
     target: netty-tcnative-2.0.84.Final-redhat-00001-linux-ppcle_64-fedora.jar
     url: http://download.devel.redhat.com/brewroot/vol/rhel-8/packages/io.netty-netty-tcnative-parent-ppcle/2.0.84.Final_redhat_00001/1/maven/io/netty/netty-tcnative/2.0.84.Final-redhat-00001/netty-tcnative-2.0.84.Final-redhat-00001-linux-ppcle_64-fedora.jar
