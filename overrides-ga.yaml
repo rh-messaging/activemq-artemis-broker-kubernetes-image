@@ -1,11 +1,11 @@
 #See https://docs.cekit.io/en/latest/descriptor/overrides.html
 name: &name "amq-broker-7/amq-broker-714-openshift-rhel9"
-description: "Red Hat AMQ Broker 7.14.1 OpenShift container image"
-version: &version "7.14.1"
+description: "Red Hat AMQ Broker 7.14.2 OpenShift container image"
+version: &version "7.14.2"
 from: "registry-proxy.engineering.redhat.com/rh-osbs/amq-broker-7-amq-broker-714-rhel9@sha256:eaab753db3ab3d39f33ae4f62472e63984d30dbd2f05495021d8678bb5dbbc8e"
 labels:
   - name: "io.k8s.display-name"
-    value: "Red Hat AMQ Broker 7.14.1"
+    value: "Red Hat AMQ Broker 7.14.2"
   - name: "io.openshift.tags"
     value: "messaging,amq,java,jboss,xpaas"
   - name: "com.redhat.component"
@@ -15,9 +15,9 @@ labels:
   - name: "org.jboss.product"
     value: "amq"
   - name: "org.jboss.product.version"
-    value: "7.14.1"
+    value: "7.14.2"
   - name: "org.jboss.product.amq.version"
-    value: "7.14.1"
+    value: "7.14.2"
 envs:
   - name: "JBOSS_PRODUCT"
     value: "AMQ"
@@ -26,9 +26,9 @@ envs:
   - name: "JBOSS_IMAGE_VERSION"
     value: *version
   - name: "JBOSS_AMQ_VERSION"
-    value: "7.14.1"
+    value: "7.14.2"
   - name: "PRODUCT_VERSION"
-    value: "7.14.1"
+    value: "7.14.2"
 artifacts:
   - name: openshift-ping-common
     target: openshift-ping-common-1.2.6.Final-redhat-1.jar
@@ -135,9 +135,9 @@ osbs:
           - aarch64
       image_build_method: imagebuilder
       tags:
-        - "7.14.1.CON.1.CR3"
-        - "7.14.1.CON.1"
-        - "7.14.1"
+        - "7.14.2.CON.1.SR1"
+        - "7.14.2.CON.1"
+        - "7.14.2"
   repository:
     name: containers/amq-broker
     branch: amq-broker-7.14-openshift-rhel-9
